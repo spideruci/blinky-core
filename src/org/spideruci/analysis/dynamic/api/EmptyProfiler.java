@@ -1,43 +1,16 @@
-package org.spideruci.analysis.dynamic;
+package org.spideruci.analysis.dynamic.api;
 
 import org.spideruci.analysis.trace.TraceEvent;
-
-public interface IProfiler {
-  
-  public void startProfiling();
-  public void endProfiling();
-  
-  public void willProfile();
-  public void profileMethodEntry(final TraceEvent e);
-
-  public void profileMethodArgument(final TraceEvent e);
-  public void profileMethodInvoke(final TraceEvent e);
-  
-  public void profileInsn(final TraceEvent e);
-  
-  public void profileFieldInsn(final TraceEvent e);
-  public void profileVarInsn(final TraceEvent e);
-  public void profileArrayInsn(final TraceEvent e);
-  
-  public void profileMethodExit(final TraceEvent e);
-  
-  
-  public void willInstrumentClass(final String className);
-  public void willInstrumentMethod(final TraceEvent e);
-  public void willInstrumentCode(final TraceEvent e);
-
-}
-
 
 /**
  * A no-op profiler that subclasses can use to inherit from.
  * The stub implementations themselves do not do anything much, but they
  * help avoid setup empty declarations for all methods for an IProfiler
  * implementation.
- * 
+ *
  * @author vpalepu
  */
-class EmptyProfiler implements IProfiler {
+public class EmptyProfiler implements IProfiler {
 
   @Override
   public void willProfile() {
@@ -93,14 +66,14 @@ class EmptyProfiler implements IProfiler {
   public void endProfiling() {
     // Convenience stub. Subclasses should appropriate implementation.
   }
-  
+
   @Override
   public void willInstrumentClass(final String className)  { }
-  
+
   @Override
   public void willInstrumentMethod(final TraceEvent e)  { }
-  
+
   @Override
   public void willInstrumentCode(final TraceEvent e) { }
-  
+
 }

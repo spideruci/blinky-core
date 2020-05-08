@@ -1,7 +1,8 @@
-package org.spideruci.analysis.dynamic;
+package org.spideruci.analysis.dynamic.profilers;
 
 import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 
+import org.spideruci.analysis.dynamic.api.EmptyProfiler;
 import org.spideruci.analysis.trace.EventType;
 import org.spideruci.analysis.trace.TraceEvent;
 
