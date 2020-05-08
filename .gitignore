@@ -83,4 +83,5 @@ Blinky.ucls
 *iml
 .settings/
 
-*.yaml
+yaml-files/
+yamls/
