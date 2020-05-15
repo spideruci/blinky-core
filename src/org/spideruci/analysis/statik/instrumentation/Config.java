@@ -1,5 +1,8 @@
 package org.spideruci.analysis.statik.instrumentation;
 
+import org.spideruci.analysis.dynamic.api.EmptyProfiler;
+import org.spideruci.analysis.dynamic.api.IProfiler;
+
 public class Config {
   public static int LINE_COUNT = 0;
   
@@ -7,6 +10,8 @@ public class Config {
   public static String[] inclusionList;
   public static String[] retransformInclusionList;
   public static String[] retransformExclusionList;
+
+  public static IProfiler profiler = new EmptyProfiler(); // TODO: set to null so that the blinky-config has a change to override this
   
   public static boolean checkInclusionList = false;
   public static boolean forceCheckInclusionList = false;

@@ -2,8 +2,10 @@ package org.spideruci.analysis.dynamic;
 
 import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 
+import org.spideruci.analysis.dynamic.api.EmptyProfiler;
 import org.spideruci.analysis.dynamic.api.IProfiler;
 import org.spideruci.analysis.dynamic.profilers.TimeAndCountTracker;
+import org.spideruci.analysis.statik.instrumentation.Config;
 import org.spideruci.analysis.trace.EventBuilder;
 import org.spideruci.analysis.trace.EventType;
 import org.spideruci.analysis.trace.TraceEvent;
@@ -14,7 +16,7 @@ public class TraceLogger {
   public static final int TIMESTAMP = 1;
   public static final int CALLDEPTH = 2;
   
-  public static IProfiler profiler = new TimeAndCountTracker();
+  public static IProfiler profiler = Config.profiler;
   
   private static long count = 0;
   
