@@ -11,7 +11,7 @@ public class Config {
   public static String[] retransformInclusionList;
   public static String[] retransformExclusionList;
 
-  public static IProfiler profiler = new EmptyProfiler(); // TODO: set to null so that the blinky-config has a change to override this
+  public static IProfiler profiler;
   
   public static boolean checkInclusionList = false;
   public static boolean forceCheckInclusionList = false;

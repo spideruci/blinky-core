@@ -13,6 +13,11 @@ import org.spideruci.analysis.trace.TraceEvent;
 public class EmptyProfiler implements IProfiler {
 
   @Override
+  public String description() {
+    return "EmptyProfiler";
+  }
+
+  @Override
   public void willProfile() {
     // Convenience stub. Subclasses should appropriate implementation.
   }

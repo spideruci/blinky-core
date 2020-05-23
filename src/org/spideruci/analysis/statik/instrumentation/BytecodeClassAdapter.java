@@ -8,6 +8,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.spideruci.analysis.dynamic.Profiler;
+import org.spideruci.analysis.dynamic.TraceLogger;
 import org.spideruci.analysis.trace.EventBuilder;
 import org.spideruci.analysis.trace.MethodDecl;
 import org.spideruci.analysis.trace.TraceEvent;
@@ -37,8 +38,7 @@ public class BytecodeClassAdapter extends ClassVisitor {
     
     mv = cv.visitMethod(access, name, desc, signature, exceptions);
     
-    if (mv != null 
-        && ((access & Opcodes.ACC_NATIVE) == 0)) {
+    if (mv != null && ((access & Opcodes.ACC_NATIVE) == 0)) {
       
       final String methodName = name + desc;
       
@@ -48,11 +48,11 @@ public class BytecodeClassAdapter extends ClassVisitor {
               access, methodName);
       
       mv = new BytecodeMethodAdapter(methodDecl, access, name, desc, mv);
+
       if (log) {
         synchronized (REAL_OUT) {
           REAL_OUT.println(methodDecl.getLog());
         }
-        
       }
     }
     return mv;

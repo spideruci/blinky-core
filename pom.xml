@@ -79,42 +79,65 @@
     </executions>
    </plugin>
    
-   <!--<plugin>-->
-    <!--<groupId>org.codehaus.mojo</groupId>-->
-    <!--<artifactId>exec-maven-plugin</artifactId>-->
-    <!--<version>1.5.0</version>-->
-    <!--<executions>-->
-     <!--<execution>-->
-      <!--<id>blinky-config-runner</id>-->
-      <!--<phase>compile</phase>-->
-      <!--<goals>-->
-       <!--<goal>java</goal>-->
-      <!--</goals>-->
-     <!--</execution>-->
-    <!--</executions>-->
-    <!--<configuration>-->
-     <!--<mainClass>org.spideruci.analysis.config.Main</mainClass>-->
-     <!--<additionalClasspathElements>-->
-      <!--<additionalClasspathElement>-->
-        <!--${basedir}/../blinky-config/target/blinky-config-0.0.1-SNAPSHOT-jar-with-dependencies.jar-->
-      <!--</additionalClasspathElement>-->
-     <!--</additionalClasspathElements>-->
-     <!--<systemProperties>-->
-      <!--<systemProperty>-->
-        <!--<key>config.filepath</key>-->
-        <!--<value>${basedir}/resources/config.yaml</value>-->
-      <!--</systemProperty>-->
-      <!--<systemProperty>-->
-        <!--<key>config.classname</key>-->
-        <!--<value>org.spideruci.analysis.statik.instrumentation.Config</value>-->
-      <!--</systemProperty>-->
-      <!--<systemProperty>-->
-        <!--<key>config.compiledoutput</key>-->
-        <!--<value>${basedir}/target/classes</value>-->
-      <!--</systemProperty>-->
-     <!--</systemProperties>-->
-    <!--</configuration>-->
-   <!--</plugin>-->
+   <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>1.5.0</version>
+    <executions>
+     <execution>
+      <id>blinky-config-runner</id>
+      <goals>
+       <goal>java</goal>
+      </goals>
+
+      <!-- so that we run it after compiling blinky-core -->
+      <phase>compile</phase>
+     </execution>
+    </executions>
+
+    <configuration>
+     <!-- entry class for blinky-config -->
+     <mainClass>org.spideruci.analysis.config.Main</mainClass>
+
+     <!-- setting up a lean dependency graph to run blinky-config -->
+     <includeProjectDependencies>false</includeProjectDependencies>
+     <includePluginDependencies>true</includePluginDependencies>
+     <executableDependency>
+      <groupId>org.spideruci.analysis.config</groupId>
+      <artifactId>blinky-config</artifactId>
+     </executableDependency>
+
+     <!-- passing arguments to blinky-config via system arguments-->
+     <systemProperties>
+      <systemProperty>
+        <key>config.filepath</key>
+        <value>${basedir}/resources/config.yaml</value>
+      </systemProperty>
+      <systemProperty>
+        <key>config.classname</key>
+        <value>org.spideruci.analysis.statik.instrumentation.Config</value>
+      </systemProperty>
+      <systemProperty>
+        <key>config.compiledoutput</key>
+        <value>${basedir}/target/classes</value>
+      </systemProperty>
+      <systemProperty>
+       <key>config.profilerclassname</key>
+       <value>org.spideruci.analysis.dynamic.api.EmptyProfiler</value>
+      </systemProperty>
+
+     </systemProperties>
+    </configuration>
+
+    <!-- List of direct dependencies needed to run blinky-config -->
+    <dependencies>
+     <dependency>
+      <groupId>org.spideruci.analysis.config</groupId>
+      <artifactId>blinky-config</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+     </dependency>
+    </dependencies>
+   </plugin>
    
   </plugins>
  </build>
@@ -145,51 +168,6 @@
  </dependencies>
 
  <profiles>
- 
-  <profile>
-    <id>config</id>
-    <build>
-      <plugins>
-        <plugin>
-         <groupId>org.codehaus.mojo</groupId>
-         <artifactId>exec-maven-plugin</artifactId>
-         <version>1.5.0</version>
-         <executions>
-          <execution>
-           <id>blinky-config-runner</id>
-           <phase>compile</phase>
-           <goals>
-            <goal>java</goal>
-           </goals>
-          </execution>
-         </executions>
-         <configuration>
-          <mainClass>org.spideruci.analysis.config.Main</mainClass>
-          <additionalClasspathElements>
-           <additionalClasspathElement>
-             ${basedir}/../blinky-config/target/blinky-config-0.0.1-SNAPSHOT-jar-with-dependencies.jar
-           </additionalClasspathElement>
-          </additionalClasspathElements>
-          <systemProperties>
-           <systemProperty>
-             <key>config.filepath</key>
-             <value>${basedir}/resources/config.yaml</value>
-           </systemProperty>
-           <systemProperty>
-             <key>config.classname</key>
-             <value>org.spideruci.analysis.statik.instrumentation.Config</value>
-           </systemProperty>
-           <systemProperty>
-             <key>config.compiledoutput</key>
-             <value>${basedir}/target/classes</value>
-           </systemProperty>
-          </systemProperties>
-         </configuration>
-        </plugin>
-      </plugins>
-    
-    </build>
-  </profile>
  
   <profile>
    <id>offline</id>

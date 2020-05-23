@@ -39,7 +39,7 @@ public class Profiler {
   public static boolean logInvokeRuntimeSign = false;
   public static boolean logEnterRuntimeSign = false;
   
-  public static boolean log = true;
+  public static boolean log = false;
   
   public static PrintStream REAL_OUT = System.out;
   public static PrintStream REAL_ERR = System.err;
@@ -67,7 +67,8 @@ public class Profiler {
         logSwitch = 
 //        logInvokeRuntimeSign = 
         logEnterRuntimeSign = 
-        log = value;
+//        log =
+            value;
   }
 
   synchronized static public void initProfiler(String args) {
@@ -504,7 +505,12 @@ public class Profiler {
 
   synchronized static public void setGuard1() {
     $guard1$ = true;
-    TraceLogger.printTraceCount();
+
+    if(TraceLogger.profiler == null) {
+      TraceLogger.printTraceCount();
+      return;
+    }
+
     TraceLogger.profiler.endProfiling();
   }
   

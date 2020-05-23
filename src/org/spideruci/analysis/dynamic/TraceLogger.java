@@ -2,9 +2,7 @@ package org.spideruci.analysis.dynamic;
 
 import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 
-import org.spideruci.analysis.dynamic.api.EmptyProfiler;
 import org.spideruci.analysis.dynamic.api.IProfiler;
-import org.spideruci.analysis.dynamic.profilers.TimeAndCountTracker;
 import org.spideruci.analysis.statik.instrumentation.Config;
 import org.spideruci.analysis.trace.EventBuilder;
 import org.spideruci.analysis.trace.EventType;
@@ -100,8 +98,13 @@ public class TraceLogger {
     final String runtimeSignature = RuntimeTypeProfiler.getEnterRuntimeSignature(null);
     TraceEvent event = EventBuilder.buildEnterExecEvent(++count, tag, insnId, 
         insnType, vitalState, runtimeSignature);
+
+    if(profiler == null) {
+      printEventlog(event);
+      return;
+    }
+
     profiler.profileMethodEntry(event);
-    printEventlog(event);
   }
 
   synchronized static public void handleInvokeLog(String insnId, String tag, EventType insnType) {
@@ -111,8 +114,13 @@ public class TraceLogger {
         RuntimeTypeProfiler.getInvokeRuntimeSignature();
     TraceEvent event = EventBuilder.buildInvokeInsnExecEvent(++count, tag, 
         insnId, insnType, vitalState, runtimeSignature);
+
+    if(profiler == null) {
+      printEventlog(event);
+      return;
+    }
+
     profiler.profileMethodInvoke(event);
-    printEventlog(event);
   }
 
   synchronized static public void handleLog(String insnId, String tag, EventType insnType) {
@@ -120,14 +128,17 @@ public class TraceLogger {
 
     TraceEvent event = EventBuilder.buildInsnExecEvent(++count, tag, insnId, 
         insnType, vitalState);
+
+    if(profiler == null) {
+      printEventlog(event);
+      return;
+    }
     
     if (insnType == EventType.$exit$) {
       profiler.profileMethodExit(event);
     } else {
       profiler.profileInsn(event);
     }
-    
-    printEventlog(event);
   }
 
   synchronized static public void handleArrayLog(String insnId, String tag, EventType insnType, int arrayrefId, int index, String elementId, int length) {
@@ -135,8 +146,13 @@ public class TraceLogger {
 
     TraceEvent event = EventBuilder.buildArrayInsnExecEvent(++count, tag, 
         insnId, insnType, vitalState, arrayrefId, index, elementId, length);
+
+    if(profiler == null) {
+      printEventlog(event);
+      return;
+    }
+
     profiler.profileArrayInsn(event);
-    printEventlog(event);
   }
 
   synchronized static public void handleVarLog(String insnId, String tag, String varId) {
@@ -144,8 +160,13 @@ public class TraceLogger {
 
     TraceEvent event = EventBuilder.buildVarInsnExecEvent(++count, tag, 
         insnId, EventType.$var$, vitalState, varId);
+
+    if(profiler == null) {
+      printEventlog(event);
+      return;
+    }
+
     profiler.profileVarInsn(event);
-    printEventlog(event);
   }
 
   synchronized static public void handleFieldLog(String insnId, String tag, String fieldId, String fieldOwnerId) {
@@ -153,8 +174,13 @@ public class TraceLogger {
 
     TraceEvent event = EventBuilder.buildFieldInsnExecEvent(++count, tag, 
         insnId, EventType.$field$, vitalState, fieldId, fieldOwnerId);
+
+    if(profiler == null) {
+      printEventlog(event);
+      return;
+    }
+
     profiler.profileFieldInsn(event);
-    printEventlog(event);
   }
 
   synchronized static public void handleArgLog(String argType, String index, EventType type, boolean isFirst, boolean isLast) {

@@ -80,8 +80,6 @@ retransformInclusionList:
 # - org/w3c
 # - org/xml
 
-profiler: 'org/spideruci/analysis/dynamic/profilers/CoverageTracker'
-
 ## FUTURE EXAMPLES (NOT YET TESTED; DO NOT UNCOMMENT):
 # name: blinky
 # number: !!int 1

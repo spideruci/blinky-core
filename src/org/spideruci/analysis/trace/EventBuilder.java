@@ -90,6 +90,11 @@ public class EventBuilder {
     methodDecl.setProp(DeclPropNames.NAME, name);
     methodDecl.setProp(DeclPropNames.ACCESS, String.valueOf(access));
     methodDecl.setProp(DeclPropNames.OWNER, className);
+
+    if (TraceLogger.profiler != null) {
+      TraceLogger.profiler.willInstrumentMethod(methodDecl);
+    }
+
     return methodDecl;
   }
   
@@ -121,8 +126,12 @@ public class EventBuilder {
     insnEvent.setProp(InsnPropNames.OPERAND3, op3);
 
     String instructionLog = insnEvent.getLog();
+
+    if (TraceLogger.profiler != null) {
+      TraceLogger.profiler.willInstrumentCode(insnEvent);
+    }
+
     if(Profiler.log) {
-//      TraceLogger.outprintln(instructionLog);
       Profiler.REAL_OUT.println(instructionLog);
     }
     

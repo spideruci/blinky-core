@@ -75,7 +75,7 @@ public class Blinksformer implements ClassFileTransformer {
       ErrorLogManager.logClassTxStatus(className, isRuntime, FAILD);
       instrumentedBytes = classBytes;
     }
-    TraceLogger.printTraceCount(startTime, className);
+
     return instrumentedBytes;
   }
   

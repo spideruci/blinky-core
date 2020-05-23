@@ -3,6 +3,8 @@ package org.spideruci.analysis.dynamic.api;
 import org.spideruci.analysis.trace.TraceEvent;
 
 public interface IProfiler {
+
+  public String description();
   
   public void startProfiling();
   public void endProfiling();

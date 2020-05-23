@@ -13,6 +13,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.util.CheckClassAdapter;
 import org.spideruci.analysis.dynamic.Profiler;
+import org.spideruci.analysis.dynamic.TraceLogger;
 
 public class ClassInstrumenter {
   
@@ -43,12 +44,15 @@ public class ClassInstrumenter {
       e.printStackTrace();
       throw e;
     }
+
+    if (TraceLogger.profiler != null) {
+      TraceLogger.profiler.willInstrumentClass(className);
+    }
     
     return bytecode2;
   }
   
-  protected byte[] writeProbes(String className, byte[] bytecode, 
-      boolean isControlAdapter) {
+  protected byte[] writeProbes(String className, byte[] bytecode, boolean isControlAdapter) {
     
     byte[] bytecode2 = null;
     ClassReader cr = new ClassReader(bytecode);
@@ -61,8 +65,7 @@ public class ClassInstrumenter {
         cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
         classAdapter = new ControlDepAdapter(cw, className, false);
       } else {
-        cw = FRAMES ? new ClassWriter(ClassWriter.COMPUTE_FRAMES)
-            : new ClassWriter(ClassWriter.COMPUTE_MAXS);
+        cw = FRAMES ? new ClassWriter(ClassWriter.COMPUTE_FRAMES) : new ClassWriter(ClassWriter.COMPUTE_MAXS);
         classAdapter = new BytecodeClassAdapter(cw, className);
       }
       

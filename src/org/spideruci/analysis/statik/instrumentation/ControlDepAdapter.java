@@ -9,6 +9,9 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.spideruci.analysis.statik.controlflow.ControlFlowAnalyzer;
 
+/**
+ * Used to mark bytecode indicies.
+ */
 public class ControlDepAdapter extends ClassNode {
   
   public static final String BYTECODE_LDC_MARKER = "blinkybytecode@";
