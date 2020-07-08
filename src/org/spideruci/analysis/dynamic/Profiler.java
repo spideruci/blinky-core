@@ -563,11 +563,9 @@ public class Profiler {
     } else if(entryMethod != null) {
       return methodName.equals(entryMethod);
     }
-    
     boolean regular = methodName.equals("main([Ljava/lang/String;)V") 
         || methodName.equals("realMain([Ljava/lang/String;)V");
-    regular =  (methodName.equals("run()V") &&
-        ownerName.equals("net/percederberg/tetris/Game$GameThread"));
+    
     return regular;
   }
   

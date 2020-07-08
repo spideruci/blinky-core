@@ -146,10 +146,9 @@ public class Blinksformer implements ClassFileTransformer {
     
     if(logErrors) { REAL_ERR.println("shouldInstrument::checking if starts with: " + Profiler.entryClass); }
     
-    if(className.startsWith(Profiler.entryClass)) {
+    if (Profiler.entryClass != null && className.startsWith(Profiler.entryClass)) {
       return shouldInstrument;
-    }
-    
+    }    
     if (Config.forceCheckInclusionList) {
       return !shouldInstrument;
     }
