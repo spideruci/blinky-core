@@ -2,11 +2,6 @@
  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <modelVersion>4.0.0</modelVersion>
- <parent>
-  <groupId>org.spideruci.analysis</groupId>
-  <artifactId>blinky</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
- </parent>
 
  <groupId>org.spideruci.analysis</groupId>
  <artifactId>blinky-core</artifactId>
@@ -139,7 +134,7 @@
   <dependency>
    <groupId>org.mockito</groupId>
    <artifactId>mockito-core</artifactId>
-   <version>2.0.31-beta</version>
+   <version>2.28.2</version>
    <scope>test</scope>
   </dependency>
   <dependency>
