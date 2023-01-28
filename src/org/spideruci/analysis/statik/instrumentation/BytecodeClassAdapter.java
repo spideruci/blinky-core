@@ -18,7 +18,7 @@ public class BytecodeClassAdapter extends ClassVisitor {
   private String sourceName;
 
   public BytecodeClassAdapter(ClassVisitor cv, String className) {
-    super(Opcodes.ASM5, cv);
+    super(Opcodes.ASM7, cv);
     this.className = className;
 //    profiler
   }
@@ -35,7 +35,6 @@ public class BytecodeClassAdapter extends ClassVisitor {
   public MethodVisitor visitMethod(int access, String name, String desc, 
       String signature, String[] exceptions) {
     MethodVisitor mv;
-    
     mv = cv.visitMethod(access, name, desc, signature, exceptions);
     
     if (mv != null && ((access & Opcodes.ACC_NATIVE) == 0)) {

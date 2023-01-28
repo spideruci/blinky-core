@@ -35,7 +35,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
   
   public BytecodeMethodAdapter(MethodDecl methodDecl, int access, String name, 
       String desc, MethodVisitor mv) {
-    super(Opcodes.ASM4, mv, access, name, desc);
+    super(Opcodes.ASM7, mv, access, name, desc);
     this.methodDecl = methodDecl;
     this.shouldInstrument = false;
     Profiler.latestLineNumber = -1;

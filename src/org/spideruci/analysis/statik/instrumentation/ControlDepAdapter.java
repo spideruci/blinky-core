@@ -21,7 +21,7 @@ public class ControlDepAdapter extends ClassNode {
   private boolean debug;
   
   public ControlDepAdapter(ClassVisitor cv, String className, boolean debug) {
-    super(Opcodes.ASM5);
+    super(Opcodes.ASM7);
     this.className = className;
     this.cv = cv;
     this.debug = debug;
