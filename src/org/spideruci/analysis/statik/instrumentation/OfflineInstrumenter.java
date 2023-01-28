@@ -79,6 +79,8 @@ public class OfflineInstrumenter {
     Profiler.setLogFlags(true);
     String source = System.getProperty("src");
     String destination = System.getProperty("dest");
+//    String source = "<prefix directory>/tryBlinky/target-11-org/classes/";
+//    String destination = "<prefix directory>/tryBlinky/target-11-ins/";
     
     out = new PrintStream(new File("offline-instrumenter.log"));
     skipped = new PrintStream(new File("offline-instrumenter.skip"));
@@ -112,7 +114,7 @@ public class OfflineInstrumenter {
     for (ClassItem classItem : classItems) {
       String className = classItem.getFullName();
 
-      if(isRestricted(className)) {
+      if(isRestricted(className)) {//skip
         transferAndPrintExecption(classItem, source, destination, null);
         instrumentStats.instrumentationSkipped();
       } else {
