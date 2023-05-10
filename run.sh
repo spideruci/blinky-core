@@ -18,9 +18,11 @@ echo  "SUBJECT: "$SUBJECT
 echo  "BLINKY: "$BLINKY
 
 JAVA="/Users/vpalepu/open-source/java/jre1.7.0_60.jre/Contents/Home/bin/java -d64 -Xmx6g"
+JAVA="/Library/Java/JavaVirtualMachines/jdk-17.0.1.jdk/Contents/Home/bin/java -d64 -Xmx6g"
 
 BLINKYHOME="/Users/vpalepu/phd-open-source/blinky-core"
-BLINKYJAR="$BLINKYHOME/blinky-core/target/blinky-core-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
+BLINKYHOME="/Users/vpalepu/git/blinky-core"
+BLINKYJAR="$BLINKYHOME/target/blinky-core-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
 
 CONFIG_YAML="$BLINKYHOME/$INPUT_ID-methods.yaml"
 

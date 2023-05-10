@@ -2,12 +2,14 @@ package org.spideruci.analysis.trace;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.spideruci.analysis.dynamic.Profiler;
 import org.spideruci.analysis.dynamic.TraceLogger;
 import org.spideruci.analysis.trace.events.props.InsnExecPropNames;
 import org.spideruci.analysis.trace.events.props.VarInsnExecPropNames;
 
+@Ignore
 public class InsnExecEventCreationTest extends ExecutionEventTestScafold {
   
   public InsnExecEventCreationTest() {

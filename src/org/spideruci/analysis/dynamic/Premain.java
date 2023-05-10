@@ -1,6 +1,7 @@
 package org.spideruci.analysis.dynamic;
 
 import static org.spideruci.analysis.dynamic.Profiler.REAL_ERR;
+import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 
 import java.lang.instrument.Instrumentation;
 import java.lang.instrument.UnmodifiableClassException;
@@ -27,6 +28,8 @@ public class Premain {
     
     started = true;
     
+    REAL_OUT.println("Premain");
+
     Profiler.initProfiler(agentArguments);
     
     REAL_ERR.println("EXCLUSION LIST");
@@ -60,12 +63,12 @@ public class Premain {
         if(!instrumentation.isModifiableClass(loadedClass)) {
           continue;
         }
-        try {
-          instrumentation.retransformClasses(loadedClass);
-        } catch (UnmodifiableClassException e) {
-          REAL_ERR.println(loadedClass);
-          e.printStackTrace(REAL_ERR);
-        }
+        // try {
+        //   instrumentation.retransformClasses(loadedClass);
+        // } catch (UnmodifiableClassException e) {
+        //   REAL_ERR.println(loadedClass);
+        //   e.printStackTrace(REAL_ERR);
+        // }
       }
     } else {
       REAL_ERR.println("FEEDBACK: Class Retransformation is disabled.");

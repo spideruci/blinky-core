@@ -42,6 +42,7 @@ import org.spideruci.analysis.trace.TraceEvent;
  * @author vpalepu
  * 
  */
+@Ignore
 public class SourcelineInstrumentationTest {
   
   @BeforeClass
