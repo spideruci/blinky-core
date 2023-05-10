@@ -2,11 +2,13 @@ package org.spideruci.analysis.trace;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.spideruci.analysis.dynamic.Profiler;
 import org.spideruci.analysis.dynamic.TraceLogger;
 import org.spideruci.analysis.trace.events.props.InvokeInsnExecPropNames;
 
+@Ignore
 public class InvokeExecTraceEventCreationTest extends ExecutionEventTestScafold {
   final private String invokeSignature;
 

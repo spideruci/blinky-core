@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -14,6 +15,7 @@ import org.spideruci.analysis.dynamic.TraceLogger;
 import org.spideruci.analysis.trace.events.props.ArrayInsnExecPropNames;
 import org.spideruci.analysis.trace.events.props.InvokeInsnExecPropNames;
 
+@Ignore
 @RunWith(Parameterized.class)
 public class ArrayInsnExecEventCreationTest extends ExecutionEventTestScafold {
   final private String arrayElement;

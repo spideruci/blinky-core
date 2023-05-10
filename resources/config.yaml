@@ -32,7 +32,8 @@ exclusionList:
 - junit/tests/extensions
 
 ## NOTE: if you are not going to add any elements to this list, then remove the list name as well.
-inclusionList: []
+inclusionList:
+- hyr/blinky
 # - java/
 # - javax/
 # - org/ietf

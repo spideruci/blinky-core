@@ -85,3 +85,5 @@ Blinky.ucls
 
 yaml-files/
 yamls/
+
+.DS_Store
