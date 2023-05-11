@@ -30,11 +30,25 @@ public class EventBuilder {
     return event;
   }
   
-  public static TraceEvent buildInsnExecEvent(long id, String dynamicHostId, 
-      String insnId, EventType insnType, long[] vitalState) {
-    TraceEvent event = TraceEvent.createInsnExecEvent(id);
-    event = setupBasicExecProperties(event, id, dynamicHostId, insnId, vitalState, insnType);
-    return event;
+  public static InsnExecEvent buildInsnExecEvent(long id, 
+		  String dynamicHostId, 
+		  String insnId, 
+		  EventType insnType, 
+		  long[] vitalState) {
+	  
+	  long threadId = vitalState[TraceLogger.THREAD_ID];
+	  long timestamp = vitalState[TraceLogger.TIMESTAMP];
+	  long calldepth = vitalState[TraceLogger.CALLDEPTH];
+
+	  InsnExecEvent event = new InsnExecEvent(id, 
+			  String.valueOf(threadId), 
+			  String.valueOf(timestamp),
+			  String.valueOf(calldepth),
+			  dynamicHostId,
+			  insnId,
+			  insnType.toString());
+
+			  return event;
   }
   
   public static EnterExecEvent buildEnterExecEvent(long id, 

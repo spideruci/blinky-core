@@ -126,8 +126,7 @@ public class TraceLogger {
   synchronized static public void handleLog(String insnId, String tag, EventType insnType) {
     long[] vitalState = getVitalExecState();
 
-    TraceEvent event = EventBuilder.buildInsnExecEvent(++count, tag, insnId, 
-        insnType, vitalState);
+    InsnExecEvent event = EventBuilder.buildInsnExecEvent(++count, tag, insnId, insnType, vitalState);
 
     if(profiler == null) {
       printEventlog(event);

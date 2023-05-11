@@ -1,6 +1,7 @@
 package org.spideruci.analysis.dynamic.api;
 
 import org.spideruci.analysis.trace.EnterExecEvent;
+import org.spideruci.analysis.trace.InsnExecEvent;
 import org.spideruci.analysis.trace.InvokeInsnExecEvent;
 import org.spideruci.analysis.trace.TraceEvent;
 
@@ -17,13 +18,13 @@ public interface IProfiler {
   public void profileMethodArgument(final TraceEvent e);
   public void profileMethodInvoke(final InvokeInsnExecEvent e);
   
-  public void profileInsn(final TraceEvent e);
+  public void profileInsn(final InsnExecEvent e);
   
   public void profileFieldInsn(final TraceEvent e);
   public void profileVarInsn(final TraceEvent e);
   public void profileArrayInsn(final TraceEvent e);
   
-  public void profileMethodExit(final TraceEvent e);
+  public void profileMethodExit(final InsnExecEvent e);
   
   
   public void willInstrumentClass(final String className);
