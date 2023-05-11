@@ -33,7 +33,7 @@ public class ProfilerB {
     boolean guard = guard();
     
     if(Profiler.logMethodEnter) {
-      handleEnterLog(instruction, tag, EventType.$enter$);
+      handleEnterLog(instruction, tag);
     }
     $guard1$ = guard;
   }
@@ -62,7 +62,7 @@ public class ProfilerB {
     if($guard1$) return;
     boolean guard = guard();
     if(Profiler.logMethodInvoke) {
-      handleInvokeLog(instruction, tag, EventType.$invoke$);
+      handleInvokeLog(instruction, tag);
     }
     reguard(guard);
   }
