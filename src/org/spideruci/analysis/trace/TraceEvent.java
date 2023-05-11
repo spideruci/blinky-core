@@ -19,7 +19,7 @@ import org.spideruci.analysis.util.MyAssert;
  *
  */
 @SuppressWarnings("rawtypes")
-public class TraceEvent implements MethodDecl, Instruction {
+public class TraceEvent implements MethodDecl, Instruction, ITraceEvent {
   
   private static final String SEP = ",";
   private static final String IPD_SEP = "|";
@@ -42,14 +42,6 @@ public class TraceEvent implements MethodDecl, Instruction {
   
   public static TraceEvent createControlFlowEvent(long id) {
     return new TraceEvent(id, EventType.$flow$, ControlFlowPropNames.values);
-  }
-  
-  public static TraceEvent createInvokeInsnExecEvent(long id) {
-    return new TraceEvent(id, EventType.$$$, InvokeInsnExecPropNames.values);
-  }
-  
-  public static TraceEvent createEnterExecEvent(long id) {
-    return new TraceEvent(id, EventType.$$$, EnterExecPropNames.values);
   }
   
   public static TraceEvent createFieldInsnExecEvent(long id) {
@@ -128,23 +120,23 @@ public class TraceEvent implements MethodDecl, Instruction {
     if(type.isExec()) {
       int eventDescPos = offset + InsnExecPropNames.INSN_EVENT_TYPE.ordinal();
       String insnType = eventString.split(",")[eventDescPos];
+      
       switch(EventType.valueOf(insnType)) {
       case $invoke$:
-        event = TraceEvent.createInvokeInsnExecEvent(id);
-        break;
+        throw new UnsupportedOperationException();
+        
       case $enter$:
-        event = TraceEvent.createEnterExecEvent(id);
-        break;
-//      case $var$:
-//        event = TraceEvent.createVarInsnExecEvent(id);
-//        break;
+    	throw new UnsupportedOperationException();
+
       case $field$:
         event = TraceEvent.createFieldInsnExecEvent(id);
         break;
+        
       case $arrayload$:
       case $arraystore$:
         event = TraceEvent.createArrayInsnExecEvent(id);
         break;
+        
       default:
         event = TraceEvent.createInsnExecEvent(id);
       }
@@ -167,7 +159,7 @@ public class TraceEvent implements MethodDecl, Instruction {
     
     // pick up the ipd for an Insn event, if it exists
     if(type.isInsn() && ipdString != null) {
-      event.setIpd(ipdString);
+    	event.setIpd(ipdString);
     }
     
     return event;

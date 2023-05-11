@@ -210,8 +210,7 @@ public class Profiler {
   public static final String METHODENTER = "printLnMethodEnterLog";
   synchronized static public void printLnMethodEnterLog(String className, 
       String methodName, String instruction, String tag) {
-    if(getUnsetGuardCondition(className, methodName)) {
-//        || methodName.startsWith("main")) {
+    if(getUnsetGuardCondition(className, methodName)) { // QUICKFIX: `|| methodName.startsWith("main")) {`
       unsetGuard1();
     }
 
@@ -219,14 +218,13 @@ public class Profiler {
     boolean guard = guard();
     
     if(logMethodEnter) {
-      TraceLogger.handleEnterLog(instruction, tag, EventType.$enter$);
+      TraceLogger.handleEnterLog(instruction, tag);
     }
     $guard1$ = guard;
   }
   
   public static final String METHODEXIT = "printLnMethodExitLog";
-  synchronized static public void printLnMethodExitLog(String className, 
-      String methodName, String instruction, String tag) {
+  synchronized static public void printLnMethodExitLog(String className, String methodName, String instruction, String tag) {
     if($guard1$) return;
     
     boolean guard = guard();
@@ -246,7 +244,7 @@ public class Profiler {
     if($guard1$) return;
     boolean guard = guard();
     if(logMethodInvoke) {
-      handleInvokeLog(instruction, tag, EventType.$invoke$);
+      handleInvokeLog(instruction, tag);
     }
     reguard(guard);
   }

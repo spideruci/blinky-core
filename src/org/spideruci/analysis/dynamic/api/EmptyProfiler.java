@@ -1,5 +1,7 @@
 package org.spideruci.analysis.dynamic.api;
 
+import org.spideruci.analysis.trace.EnterExecEvent;
+import org.spideruci.analysis.trace.InvokeInsnExecEvent;
 import org.spideruci.analysis.trace.TraceEvent;
 
 /**
@@ -23,7 +25,7 @@ public class EmptyProfiler implements IProfiler {
   }
 
   @Override
-  public void profileMethodEntry(final TraceEvent e) {
+  public void profileMethodEntry(final EnterExecEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
 
@@ -33,7 +35,7 @@ public class EmptyProfiler implements IProfiler {
   }
 
   @Override
-  public void profileMethodInvoke(final TraceEvent e) {
+  public void profileMethodInvoke(final InvokeInsnExecEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
 

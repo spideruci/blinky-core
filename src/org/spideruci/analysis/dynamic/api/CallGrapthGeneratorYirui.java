@@ -1,5 +1,6 @@
 package org.spideruci.analysis.dynamic.api;
 
+import org.spideruci.analysis.trace.EnterExecEvent;
 import org.spideruci.analysis.trace.EventType;
 import org.spideruci.analysis.trace.TraceEvent;
 
@@ -50,17 +51,16 @@ public class CallGrapthGeneratorYirui extends EmptyProfiler implements IProfiler
 	}
 
 	@Override
-	public void profileMethodEntry(final TraceEvent e) {
+	public void profileMethodEntry(final EnterExecEvent e) {
 		REAL_OUT.print("profileMethodEntry ");
 		Thread.dumpStack();
-		REAL_OUT.print(" " + e.getInsnFieldName());
-		REAL_OUT.print(" " + e.getDeclName());
+		
 		REAL_OUT.print(" " + e.getLog());
 		REAL_OUT.print(" " + e.getType());
-		REAL_OUT.print("  " + e.getExecInsnType());
-		REAL_OUT.print("  EventId=" + e.getExecInsnEventId());
-		REAL_OUT.print(" Calldepth=" + e.getExecCalldepth());
-		REAL_OUT.println(" Timestamp=" + e.getExecTimestamp());
+		REAL_OUT.print("  " + e.insnEventType);
+		REAL_OUT.print("  EventId=" + e.insnEventId);
+		REAL_OUT.print(" Calldepth=" + e.calldepth);
+		REAL_OUT.println(" Timestamp=" + e.timestamp);
 	}
 
 	@Override

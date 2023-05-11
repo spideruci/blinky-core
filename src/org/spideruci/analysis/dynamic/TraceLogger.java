@@ -4,8 +4,11 @@ import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 
 import org.spideruci.analysis.dynamic.api.IProfiler;
 import org.spideruci.analysis.statik.instrumentation.Config;
+import org.spideruci.analysis.trace.EnterExecEvent;
 import org.spideruci.analysis.trace.EventBuilder;
 import org.spideruci.analysis.trace.EventType;
+import org.spideruci.analysis.trace.InsnExecEvent;
+import org.spideruci.analysis.trace.InvokeInsnExecEvent;
 import org.spideruci.analysis.trace.TraceEvent;
 
 public class TraceLogger {
@@ -92,12 +95,11 @@ public class TraceLogger {
     profiler.willProfile();
   }
   
-  synchronized static public void handleEnterLog(String insnId, String tag, EventType insnType) {
+  synchronized static public void handleEnterLog(String hostInsnId, String tag) {
     long[] vitalState = getVitalExecState();
 
     final String runtimeSignature = RuntimeTypeProfiler.getEnterRuntimeSignature(null);
-    TraceEvent event = EventBuilder.buildEnterExecEvent(++count, tag, insnId, 
-        insnType, vitalState, runtimeSignature);
+    EnterExecEvent event = EventBuilder.buildEnterExecEvent(++count, tag, hostInsnId, vitalState, runtimeSignature);
 
     if(profiler == null) {
       printEventlog(event);
@@ -107,13 +109,11 @@ public class TraceLogger {
     profiler.profileMethodEntry(event);
   }
 
-  synchronized static public void handleInvokeLog(String insnId, String tag, EventType insnType) {
+	synchronized static public void handleInvokeLog(String insnId, String tag) {
     long[] vitalState = getVitalExecState();
 
-    final String runtimeSignature = 
-        RuntimeTypeProfiler.getInvokeRuntimeSignature();
-    TraceEvent event = EventBuilder.buildInvokeInsnExecEvent(++count, tag, 
-        insnId, insnType, vitalState, runtimeSignature);
+    final String runtimeSignature = RuntimeTypeProfiler.getInvokeRuntimeSignature();
+    InvokeInsnExecEvent event = EventBuilder.buildInvokeInsnExecEvent(++count, tag, insnId, vitalState, runtimeSignature);
 
     if(profiler == null) {
       printEventlog(event);
@@ -206,6 +206,15 @@ public class TraceLogger {
     
     // TODO
     // REAL_OUT.println(event.getLog());
+  }
+  
+  synchronized static private void printEventlog(InsnExecEvent event) {
+	  int insnId = Integer.parseInt(event.insnEventId);
+	  if(Profiler.stopAppInsn && insnId >= 0) {
+		  return;
+	  }
+
+	  // REAL_OUT.println(event.getLog());
   }
 
   public static long premainStartTime = 0;

@@ -37,20 +37,47 @@ public class EventBuilder {
     return event;
   }
   
-  public static TraceEvent buildEnterExecEvent(long id, String dynamicHostId, 
-      String insnId, EventType insnType, long[] vitalState, String runtimeSignature) {
-    TraceEvent event = TraceEvent.createEnterExecEvent(id);
-    event = setupBasicExecProperties(event, id, dynamicHostId, insnId, vitalState, insnType);
-    event.setProp(EnterExecPropNames.RUNTIME_SIGNATURE, runtimeSignature);
-    return event;
+  public static EnterExecEvent buildEnterExecEvent(long id, 
+		  String dynamicHostId, 
+		  String insnId, 
+		  long[] vitalState, 
+		  String runtimeSignature) {
+
+	  long threadId = vitalState[TraceLogger.THREAD_ID];
+	  long timestamp = vitalState[TraceLogger.TIMESTAMP];
+	  long calldepth = vitalState[TraceLogger.CALLDEPTH];
+	  
+	  EnterExecEvent event = 
+			  new EnterExecEvent(id, 
+					  String.valueOf(threadId), 
+					  String.valueOf(timestamp), 
+					  String.valueOf(calldepth), 
+					  dynamicHostId, 
+					  insnId, 
+					  runtimeSignature);
+	  return event;
   }
   
-  public static TraceEvent buildInvokeInsnExecEvent(long id, String dynamicHostId, 
-      String insnId, EventType insnType, long[] vitalState, String runtimeSignature) {
-    TraceEvent event = TraceEvent.createInvokeInsnExecEvent(id);
-    event = setupBasicExecProperties(event, id, dynamicHostId, insnId, vitalState, insnType);
-    event.setProp(InvokeInsnExecPropNames.RUNTIME_SIGNATURE, runtimeSignature);
-    return event;
+  public static InvokeInsnExecEvent buildInvokeInsnExecEvent(long id, 
+		  String dynamicHostId, 
+		  String insnId, 
+		  long[] vitalState, 
+		  String runtimeSignature) {
+
+	  long threadId = vitalState[TraceLogger.THREAD_ID];
+	  long timestamp = vitalState[TraceLogger.TIMESTAMP];
+	  long calldepth = vitalState[TraceLogger.CALLDEPTH];
+
+	  InvokeInsnExecEvent event = 
+			  new InvokeInsnExecEvent(id, 
+					  String.valueOf(threadId), 
+					  String.valueOf(timestamp), 
+					  String.valueOf(calldepth), 
+					  dynamicHostId, 
+					  insnId, 
+					  runtimeSignature);
+
+	  return event;
   }
   
   public static TraceEvent buildArrayInsnExecEvent(long id, String dynamicHostId, 
