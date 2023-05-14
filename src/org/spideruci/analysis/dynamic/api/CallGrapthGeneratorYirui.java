@@ -3,6 +3,7 @@ package org.spideruci.analysis.dynamic.api;
 import org.spideruci.analysis.trace.EnterExecEvent;
 import org.spideruci.analysis.trace.EventType;
 import org.spideruci.analysis.trace.InsnExecEvent;
+import org.spideruci.analysis.trace.MethodDecl;
 import org.spideruci.analysis.trace.TraceEvent;
 
 import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
@@ -28,7 +29,7 @@ public class CallGrapthGeneratorYirui extends EmptyProfiler implements IProfiler
 	}
 
 	@Override
-	public void willInstrumentMethod(final TraceEvent e) {
+	public void willInstrumentMethod(final MethodDecl e) {
 		if (e.getType() != EventType.$$method$$) {
 			return;
 		}

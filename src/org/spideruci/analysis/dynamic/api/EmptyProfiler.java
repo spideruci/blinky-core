@@ -3,6 +3,7 @@ package org.spideruci.analysis.dynamic.api;
 import org.spideruci.analysis.trace.EnterExecEvent;
 import org.spideruci.analysis.trace.InsnExecEvent;
 import org.spideruci.analysis.trace.InvokeInsnExecEvent;
+import org.spideruci.analysis.trace.MethodDecl;
 import org.spideruci.analysis.trace.TraceEvent;
 
 /**
@@ -79,7 +80,7 @@ public class EmptyProfiler implements IProfiler {
   public void willInstrumentClass(final String className)  { }
 
   @Override
-  public void willInstrumentMethod(final TraceEvent e)  { }
+  public void willInstrumentMethod(final MethodDecl e)  { }
 
   @Override
   public void willInstrumentCode(final TraceEvent e) { }

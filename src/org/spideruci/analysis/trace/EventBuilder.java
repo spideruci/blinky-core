@@ -125,12 +125,8 @@ public class EventBuilder {
     return event;
   }
   
-  public static TraceEvent buildMethodDecl(String className, int access, String name) {
-    TraceEvent methodDecl = 
-        TraceEvent.createDeclEvent(Count.anotherMethod(), EventType.$$method$$);
-    methodDecl.setProp(DeclPropNames.NAME, name);
-    methodDecl.setProp(DeclPropNames.ACCESS, String.valueOf(access));
-    methodDecl.setProp(DeclPropNames.OWNER, className);
+  public static MethodDecl buildMethodDecl(String className, int access, String name) {
+	  MethodDecl methodDecl = new MethodDecl(Count.anotherMethod(), name, className, String.valueOf(access));
 
     if (TraceLogger.profiler != null) {
       TraceLogger.profiler.willInstrumentMethod(methodDecl);
