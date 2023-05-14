@@ -3,6 +3,7 @@ package org.spideruci.analysis.dynamic.api;
 import org.spideruci.analysis.trace.EnterExecEvent;
 import org.spideruci.analysis.trace.InsnExecEvent;
 import org.spideruci.analysis.trace.InvokeInsnExecEvent;
+import org.spideruci.analysis.trace.MethodDecl;
 import org.spideruci.analysis.trace.TraceEvent;
 
 public interface IProfiler {
@@ -28,7 +29,7 @@ public interface IProfiler {
   
   
   public void willInstrumentClass(final String className);
-  public void willInstrumentMethod(final TraceEvent e);
+  public void willInstrumentMethod(final MethodDecl e);
   public void willInstrumentCode(final TraceEvent e);
 
   // TODO:

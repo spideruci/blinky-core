@@ -19,7 +19,7 @@ import org.spideruci.analysis.util.MyAssert;
  *
  */
 @SuppressWarnings("rawtypes")
-public class TraceEvent implements MethodDecl, Instruction, ITraceEvent {
+public class TraceEvent implements Instruction, ITraceEvent {
   
   private static final String SEP = ",";
   private static final String IPD_SEP = "|";
