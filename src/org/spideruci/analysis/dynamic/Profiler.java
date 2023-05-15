@@ -157,10 +157,11 @@ public class Profiler {
       REAL_OUT.printf("'%s':%s\n", arg_name , arg_value);
       
       switch(arg_name) {
-      case "purewhitelist":
+      case "onlyfromallowlist":
+    	Config.checkInclusionList = true;
         Config.forceCheckInclusionList = true;
         break;
-      case "whitelist":
+      case "allowlist":
         Config.checkInclusionList = true;
         break;
       case "entry-method":

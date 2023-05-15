@@ -13,8 +13,8 @@ public class Config {
 
   public static IProfiler profiler;
   
-  public static boolean checkInclusionList = false;
-  public static boolean forceCheckInclusionList = false;
+  public static boolean checkInclusionList = true;
+  public static boolean forceCheckInclusionList = true;
   
   public static final String STATIC_IDENT = "C";
   

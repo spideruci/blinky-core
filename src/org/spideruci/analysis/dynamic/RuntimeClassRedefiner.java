@@ -53,7 +53,7 @@ public class RuntimeClassRedefiner implements ClassFileTransformer {
   public static class RedefinitionTargets {
 
     public static boolean isTarget(String className) {
-      if(Blinksformer.ohHellNo(className)) {
+      if(Blinksformer.neverInstrument(className)) {
         return false;
       }
       
