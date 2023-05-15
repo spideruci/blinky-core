@@ -33,7 +33,8 @@ exclusionList:
 
 ## NOTE: if you are not going to add any elements to this list, then remove the list name as well.
 inclusionList:
-- hyr/blinky
+- org/jsoup
+# - hyr/blinky
 # - java/
 # - javax/
 # - org/ietf
