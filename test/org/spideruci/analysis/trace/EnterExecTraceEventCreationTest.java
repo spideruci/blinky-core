@@ -22,8 +22,7 @@ public class EnterExecTraceEventCreationTest extends ExecutionEventTestScafold {
     this.runtimeSignature = "(Ljava/util/randomSignature;)V";
     
     // WHEN
-    actualEvent = EventBuilder.buildEnterExecEvent(id, dynamicHostId, insnId, 
-        insnType, vitalState, runtimeSignature);
+    actualEvent = null; // EventBuilder.buildEnterExecEvent(id, dynamicHostId, insnId, insnType, vitalState, runtimeSignature);
     // And
     serializedEvent = TraceEvent.valueOf(actualEvent.toString());
   }

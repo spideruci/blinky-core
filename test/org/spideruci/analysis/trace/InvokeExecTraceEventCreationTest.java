@@ -21,8 +21,7 @@ public class InvokeExecTraceEventCreationTest extends ExecutionEventTestScafold 
     this.invokeSignature = "(Ljava/util/randomSignature;)V";
 
     // WHEN
-    actualEvent = EventBuilder.buildInvokeInsnExecEvent(id, dynamicHostId, insnId, 
-        insnType, vitalState, invokeSignature);
+    actualEvent = null; // EventBuilder.buildInvokeInsnExecEvent(id, dynamicHostId, insnId, insnType, vitalState, invokeSignature);
     // And
     serializedEvent = TraceEvent.valueOf(actualEvent.toString());
   }

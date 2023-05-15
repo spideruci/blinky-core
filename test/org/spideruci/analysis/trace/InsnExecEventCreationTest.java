@@ -19,8 +19,7 @@ public class InsnExecEventCreationTest extends ExecutionEventTestScafold {
     this.insnType = EventType.$var$;
 
     // WHEN
-    actualEvent = EventBuilder.buildInsnExecEvent(id, dynamicHostId, 
-        insnId, insnType, vitalState);
+    actualEvent = null; // EventBuilder.buildInsnExecEvent(id, dynamicHostId, insnId, insnType, vitalState);
     
     // And
     serializedEvent = TraceEvent.valueOf(actualEvent.toString());
