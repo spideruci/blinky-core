@@ -123,7 +123,7 @@
       </systemProperty>
       <systemProperty>
        <key>config.profilerclassname</key>
-       <value>org.spideruci.analysis.dynamic.api.CallGrapthGeneratorYirui</value>
+       <value>org.spideruci.analysis.dynamic.api.CallGrapthGenerator</value>
       </systemProperty>
 
      </systemProperties>
