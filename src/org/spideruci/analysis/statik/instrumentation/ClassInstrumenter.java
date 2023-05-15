@@ -41,7 +41,6 @@ public class ClassInstrumenter {
         checkBytecode(bytecode2);
       }
     } catch(Exception e) {
-      e.printStackTrace();
       throw e;
     }
 
@@ -74,7 +73,6 @@ public class ClassInstrumenter {
       checkBytecode(bytecode2);
       
     } catch (Exception e) {
-      e.printStackTrace();
       throw e;
     }
     
