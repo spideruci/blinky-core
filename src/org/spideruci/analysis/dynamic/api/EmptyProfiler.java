@@ -67,12 +67,12 @@ public class EmptyProfiler implements IProfiler {
   }
 
   @Override
-  public void startProfiling() {
+  public void startProfiling(String desc) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
 
   @Override
-  public void endProfiling() {
+  public void endProfiling(String desc) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
 

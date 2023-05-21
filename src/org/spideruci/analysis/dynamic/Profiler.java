@@ -244,6 +244,7 @@ public class Profiler {
   synchronized static public void printlnInvokeLog(String instruction, String tag) {
     if($guard1$) return;
     boolean guard = guard();
+    
     if(logMethodInvoke) {
       handleInvokeLog(instruction, tag);
     }
@@ -498,7 +499,7 @@ public class Profiler {
   synchronized static public void unsetGuard1() {
     thread = Thread.currentThread().getId();
     TraceLogger.time = System.currentTimeMillis();
-    TraceLogger.profiler.startProfiling();
+    TraceLogger.profiler.startProfiling("");
     $guard1$ = false;
   }
 
@@ -510,7 +511,7 @@ public class Profiler {
       return;
     }
 
-    TraceLogger.profiler.endProfiling();
+    TraceLogger.profiler.endProfiling("");
   }
   
   private static int count = 0;

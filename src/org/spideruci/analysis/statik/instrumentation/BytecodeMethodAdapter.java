@@ -146,11 +146,10 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
     }
   }
   
-  @SuppressWarnings("deprecation")
   @Override
-  public void visitMethodInsn(int opcode, String owner, String name, String desc) {
+  public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean isInterface) {
     if(!shouldInstrument || !Profiler.logMethodInvoke) {
-      super.visitMethodInsn(opcode, owner, name, desc); // make the actual call.
+      super.visitMethodInsn(opcode, owner, name, desc, isInterface); // make the actual call.
       return;
     }
     
@@ -188,7 +187,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
         .build(ProfilerB.ACTIVATE, Config.PROFILER_B_NAME);
       }
       
-      super.visitMethodInsn(opcode, owner, name, desc); // make the actual call.
+      super.visitMethodInsn(opcode, owner, name, desc, isInterface); // make the actual call.
       
       instructionLog = buildInstructionLog(byteIndex, lineNum, 
           EventType.$complete$, -4, methodDecl.getId(), owner, name, desc);
