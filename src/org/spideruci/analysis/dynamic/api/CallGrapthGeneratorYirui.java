@@ -17,7 +17,7 @@ public class CallGrapthGeneratorYirui extends EmptyProfiler implements IProfiler
 	}
 
 	@Override
-	public void startProfiling() {
+	public void startProfiling(String desc) {
 		REAL_OUT.println("Starting traceing");
 	}
 
@@ -79,7 +79,7 @@ public class CallGrapthGeneratorYirui extends EmptyProfiler implements IProfiler
 	}
 
 	@Override
-	public void endProfiling() {
+	public void endProfiling(String desc) {
 		REAL_OUT.println("endProfiling");
 	}
   

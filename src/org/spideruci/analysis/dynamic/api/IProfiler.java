@@ -10,8 +10,8 @@ public interface IProfiler {
 
   public String description();
   
-  public void startProfiling();
-  public void endProfiling();
+  public void startProfiling(String description);
+  public void endProfiling(String description);
   
   public void willProfile();
   public void profileMethodEntry(final EnterExecEvent e);
