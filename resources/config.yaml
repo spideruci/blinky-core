@@ -33,7 +33,20 @@ exclusionList:
 
 ## NOTE: if you are not going to add any elements to this list, then remove the list name as well.
 inclusionList:
-- org/apache/commons/csv
+- org/apache/commons/pool2
+# - org/apache/commons/net
+# - org/apache/commons/jexl3
+# - org/apache/commons/imaging
+# - org/apache/commons/jxpath
+# - org/apache/commons/validator
+# - org/apache/commons/compress
+# - org/apache/xmlgraphics
+# - com/google/gson
+# - com/fasterxml/jackson/dataformat/xml
+# - com/fasterxml/jackson/databind
+# - com/fasterxml/jackson/core
+# - org/apache/commons/configuration2
+# - org/apache/commons/csv
 # - org/apache/commons/lang3
 # - org/apache/commons/collections4
 # - org/apache/commons/codec
