@@ -12,6 +12,7 @@ public interface IProfiler {
   
   public void startProfiling(String description);
   public void endProfiling(String description);
+  public void emitLogs();
   
   public void willProfile();
   public void profileMethodEntry(final EnterExecEvent e);

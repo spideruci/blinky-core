@@ -72,6 +72,12 @@ public class ProbeBuilder implements Opcodes {
     return this;
   }
   
+  public ProbeBuilder passLongVar(int var) {
+	  this.mv.visitVarInsn(Opcodes.LLOAD, var);
+	  this.callbackDesc.append(Config.LONG_TYPEDESC);
+	  return this;
+  }
+  
   public ProbeBuilder passThis(String methodAccess) {
     int access = Integer.parseInt(methodAccess);
     if((access & Opcodes.ACC_STATIC) == Opcodes.ACC_STATIC) {

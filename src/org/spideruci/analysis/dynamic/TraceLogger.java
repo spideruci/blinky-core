@@ -95,18 +95,20 @@ public class TraceLogger {
     profiler.willProfile();
   }
   
-  synchronized static public void handleEnterLog(String hostInsnId, String tag) {
+  synchronized static public long handleEnterLog(String hostInsnId, String tag) {
     long[] vitalState = getVitalExecState();
 
     final String runtimeSignature = RuntimeTypeProfiler.getEnterRuntimeSignature(null);
-    EnterExecEvent event = EventBuilder.buildEnterExecEvent(++count, tag, hostInsnId, vitalState, runtimeSignature);
+    final long eventId = ++count;
+    EnterExecEvent event = EventBuilder.buildEnterExecEvent(eventId, tag, hostInsnId, vitalState, runtimeSignature);
 
     if(profiler == null) {
       printEventlog(event);
-      return;
+      return eventId;
     }
 
     profiler.profileMethodEntry(event);
+    return eventId;
   }
 
 	synchronized static public void handleInvokeLog(String insnId, String tag) {
@@ -139,6 +141,24 @@ public class TraceLogger {
       profiler.profileInsn(event);
     }
   }
+  
+  synchronized static public void handleLog(long dynId, String insnId, String tag, EventType insnType) {
+	    long[] vitalState = getVitalExecState();
+	    vitalState[CALLDEPTH] = dynId;
+
+	    InsnExecEvent event = EventBuilder.buildInsnExecEvent(++count, tag, insnId, insnType, vitalState);
+
+	    if(profiler == null) {
+	      printEventlog(event);
+	      return;
+	    }
+	    
+	    if (insnType == EventType.$exit$) {
+	      profiler.profileMethodExit(event);
+	    } else {
+	      profiler.profileInsn(event);
+	    }
+	  }
 
   synchronized static public void handleArrayLog(String insnId, String tag, EventType insnType, int arrayrefId, int index, String elementId, int length) {
     long[] vitalState = getVitalExecState();

@@ -209,29 +209,31 @@ public class Profiler {
   }
   
   public static final String METHODENTER = "printLnMethodEnterLog";
-  synchronized static public void printLnMethodEnterLog(String className, 
-      String methodName, String instruction, String tag) {
+  synchronized static public long printLnMethodEnterLog(String className, String methodName, String instruction, String tag) {
     if(getUnsetGuardCondition(className, methodName)) { // QUICKFIX: `|| methodName.startsWith("main")) {`
       unsetGuard1();
     }
 
-    if($guard1$) return;
+    if($guard1$) return -1;
     boolean guard = guard();
     
+    long eventId = -1;
+    
     if(logMethodEnter) {
-      TraceLogger.handleEnterLog(instruction, tag);
+      eventId = TraceLogger.handleEnterLog(instruction, tag);
     }
     $guard1$ = guard;
+    return eventId;
   }
   
   public static final String METHODEXIT = "printLnMethodExitLog";
-  synchronized static public void printLnMethodExitLog(String className, String methodName, String instruction, String tag) {
+  synchronized static public void printLnMethodExitLog(long dynId, String className, String methodName, String instruction, String tag) {
     if($guard1$) return;
     
     boolean guard = guard();
     
     if(logMethodExit) {
-      handleLog(instruction, tag, EventType.$exit$);
+      handleLog(dynId, instruction, tag, EventType.$exit$);
     }
     $guard1$ = guard;
 
@@ -567,6 +569,10 @@ public class Profiler {
         || methodName.equals("realMain([Ljava/lang/String;)V");
     
     return regular;
+  }
+  
+  synchronized public static void emitLogs() {
+	  TraceLogger.profiler.emitLogs();
   }
   
 
