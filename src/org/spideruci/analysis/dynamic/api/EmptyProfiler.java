@@ -75,6 +75,11 @@ public class EmptyProfiler implements IProfiler {
   public void endProfiling(String desc) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
+  
+  @Override
+  public void emitLogs() {
+    // Convenience stub. Subclasses should appropriate implementation.
+  }
 
   @Override
   public void willInstrumentClass(final String className)  { }

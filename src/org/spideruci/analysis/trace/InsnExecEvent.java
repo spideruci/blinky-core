@@ -4,7 +4,7 @@ import org.spideruci.analysis.trace.events.props.InsnExecPropNames;
 
 public class InsnExecEvent extends BaseTraceEvent {
 	
-	private final long id;
+	public final long id;
 	public /*final*/ String threadId;
 	public /*final*/ String timestamp;
 	public /*final*/ String calldepth;

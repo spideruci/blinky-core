@@ -33,7 +33,19 @@ exclusionList:
 
 ## NOTE: if you are not going to add any elements to this list, then remove the list name as well.
 inclusionList:
-- org/jsoup
+- org/apache/commons/csv
+# - org/apache/commons/lang3
+# - org/apache/commons/collections4
+# - org/apache/commons/codec
+# - org/jfree
+# - org/apache/commons/text
+# - org/apache/commons/io
+# - org/apache/commons/cli
+# - org/jsoup
+# - nl/tudelft/jpacman
+# - org/joda
+# - com/alibaba/fastjson
+
 # - hyr/blinky
 # - java/
 # - javax/

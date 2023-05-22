@@ -6,6 +6,7 @@ import static org.spideruci.analysis.statik.instrumentation.ControlDepAdapter.BY
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.AdviceAdapter;
 import org.spideruci.analysis.dynamic.Profiler;
 import org.spideruci.analysis.dynamic.ProfilerB;
@@ -22,6 +23,8 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
   
   private MethodDecl methodDecl;
   private boolean shouldInstrument;
+  
+  private int dynamicIdVar = -1;
   
   public static BytecodeMethodAdapter create(MethodDecl methodDecl, MethodVisitor mv) {
     int access = Integer.parseInt(methodDecl.getDeclAccess());
@@ -48,6 +51,9 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
   
   @Override
   protected void onMethodEnter() {
+	  
+    this.dynamicIdVar = this.newLocal(Type.LONG_TYPE);
+	  
     int lineNum = Profiler.latestLineNumber;
     int byteIndex = Profiler.latestBytecodeIndex;
     
@@ -100,8 +106,10 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
     .passArg(methodDecl.getDeclOwner())
     .passArg(methodDecl.getDeclName())
     .passArg(instructionLog)
-    .passThis(methodDecl.getDeclAccess())
-    .build(Profiler.METHODENTER, profilerToUse(methodDecl.getDeclOwner()));
+    .passArg(String.valueOf(methodDecl.getId())) // QUICK FIX: remove .passThis(methodDecl.getDeclAccess())
+    .build(Profiler.METHODENTER, profilerToUse(methodDecl.getDeclOwner()), "J");
+    
+    mv.visitVarInsn(Opcodes.LSTORE, this.dynamicIdVar);
     
     Profiler.latestLineNumber = lineNum;
     Profiler.latestBytecodeIndex = byteIndex;
@@ -119,10 +127,11 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
         opcode, methodDecl.getId());
     
     ProbeBuilder.start(mv)
+    .passLongVar(this.dynamicIdVar)
     .passArg(methodDecl.getDeclOwner())
     .passArg(methodDecl.getDeclName())
     .passArg(instructionLog)
-    .passThis(methodDecl.getDeclAccess())
+    .passArg(String.valueOf(methodDecl.getId())) // QUICKFIX: .passThis(methodDecl.getDeclAccess())
     .build(Profiler.METHODEXIT, profilerToUse(methodDecl.getDeclOwner()));
     
     Profiler.latestBytecodeIndex = byteIndex;
