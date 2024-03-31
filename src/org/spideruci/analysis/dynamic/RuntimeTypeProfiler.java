@@ -89,7 +89,9 @@ public class RuntimeTypeProfiler {
       throw e;
     }
     
+    @SuppressWarnings("unused")
     final String type = obj == null ? staticTypeName : obj.getClass().getName();
+    
     printLnArgLog(staticTypeName, String.valueOf(index));
   }
 

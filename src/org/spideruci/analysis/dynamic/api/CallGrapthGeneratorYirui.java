@@ -8,7 +8,7 @@ import org.spideruci.analysis.trace.TraceEvent;
 
 import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 
-public class CallGrapthGeneratorYirui extends EmptyProfiler implements IProfiler {
+public class CallGrapthGeneratorYirui extends EmptyProfiler {
 
 
 	@Override

@@ -2,7 +2,6 @@ package org.spideruci.analysis.dynamic;
 
 import static org.spideruci.analysis.dynamic.TraceLogger.handleLog;
 import static org.spideruci.analysis.dynamic.TraceLogger.handleVarLog;
-import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 import static org.spideruci.analysis.dynamic.TraceLogger.handleArgLog;
 import static org.spideruci.analysis.dynamic.TraceLogger.handleArrayLog;
 import static org.spideruci.analysis.dynamic.TraceLogger.handleEnterLog;
@@ -220,7 +219,7 @@ public class Profiler {
     long eventId = -1;
     
     if(logMethodEnter) {
-      eventId = TraceLogger.handleEnterLog(instruction, tag);
+      eventId = handleEnterLog(instruction, tag);
     }
     $guard1$ = guard;
     return eventId;
@@ -511,7 +510,9 @@ public class Profiler {
     TraceLogger.profiler().endProfiling("");
   }
   
+  @SuppressWarnings("unused")
   private static int count = 0;
+
   /**
    * Checks if the method is main(String[]); If so it returns a true value 
    * suggesting that we unset the guard that prevents the execution of the 

@@ -12,7 +12,7 @@ import org.spideruci.analysis.trace.InvokeInsnExecEvent;
 import org.spideruci.analysis.trace.MethodDecl;
 import org.spideruci.analysis.trace.TraceEvent;
 
-public class CallGraphGenerator extends EmptyProfiler implements IProfiler {
+public class CallGraphGenerator extends EmptyProfiler {
 	
 	long count = 0;
 	long invokeInsnCount = 0; 

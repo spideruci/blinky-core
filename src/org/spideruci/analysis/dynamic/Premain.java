@@ -4,7 +4,6 @@ import static org.spideruci.analysis.dynamic.Profiler.REAL_ERR;
 import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 
 import java.lang.instrument.Instrumentation;
-import java.lang.instrument.UnmodifiableClassException;
 
 import org.spideruci.analysis.statik.instrumentation.Config;
 
