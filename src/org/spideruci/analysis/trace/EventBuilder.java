@@ -2,6 +2,7 @@ package org.spideruci.analysis.trace;
 
 import org.spideruci.analysis.dynamic.Profiler;
 import org.spideruci.analysis.dynamic.TraceLogger;
+import org.spideruci.analysis.dynamic.api.IProfiler;
 import org.spideruci.analysis.trace.events.props.ArrayInsnExecPropNames;
 import org.spideruci.analysis.trace.events.props.DeclPropNames;
 import org.spideruci.analysis.trace.events.props.EnterExecPropNames;
@@ -128,9 +129,7 @@ public class EventBuilder {
   public static MethodDecl buildMethodDecl(String className, int access, String name) {
 	  MethodDecl methodDecl = new MethodDecl(Count.anotherMethod(), name, className, String.valueOf(access));
 
-    if (TraceLogger.profiler != null) {
-      TraceLogger.profiler.willInstrumentMethod(methodDecl);
-    }
+    TraceLogger.profiler().willInstrumentMethod(methodDecl);
 
     return methodDecl;
   }
@@ -164,9 +163,7 @@ public class EventBuilder {
 
     String instructionLog = insnEvent.getLog();
 
-    if (TraceLogger.profiler != null) {
-      TraceLogger.profiler.willInstrumentCode(insnEvent);
-    }
+    TraceLogger.profiler().willInstrumentCode(insnEvent);
 
     if(Profiler.log) {
       Profiler.REAL_OUT.println(instructionLog);

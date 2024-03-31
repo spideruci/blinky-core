@@ -501,19 +501,14 @@ public class Profiler {
   synchronized static public void unsetGuard1() {
     thread = Thread.currentThread().getId();
     TraceLogger.time = System.currentTimeMillis();
-    TraceLogger.profiler.startProfiling("");
+    TraceLogger.profiler().startProfiling("");
     $guard1$ = false;
   }
 
   synchronized static public void setGuard1() {
     $guard1$ = true;
 
-    if(TraceLogger.profiler == null) {
-      TraceLogger.printTraceCount();
-      return;
-    }
-
-    TraceLogger.profiler.endProfiling("");
+    TraceLogger.profiler().endProfiling("");
   }
   
   private static int count = 0;
@@ -572,7 +567,7 @@ public class Profiler {
   }
   
   synchronized public static void emitLogs() {
-	  TraceLogger.profiler.emitLogs();
+	  TraceLogger.profiler().emitLogs();
   }
   
 

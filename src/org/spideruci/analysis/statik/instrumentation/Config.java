@@ -1,6 +1,5 @@
 package org.spideruci.analysis.statik.instrumentation;
 
-import org.spideruci.analysis.dynamic.api.EmptyProfiler;
 import org.spideruci.analysis.dynamic.api.IProfiler;
 
 public class Config {

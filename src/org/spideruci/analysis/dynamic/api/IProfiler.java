@@ -8,6 +8,8 @@ import org.spideruci.analysis.trace.TraceEvent;
 
 public interface IProfiler {
 
+  public boolean shouldInstrument(String className);
+
   public String description();
   
   public void startProfiling(String description);

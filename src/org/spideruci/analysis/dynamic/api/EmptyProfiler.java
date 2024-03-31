@@ -1,5 +1,6 @@
 package org.spideruci.analysis.dynamic.api;
 
+import org.spideruci.analysis.dynamic.TraceLogger;
 import org.spideruci.analysis.trace.EnterExecEvent;
 import org.spideruci.analysis.trace.InsnExecEvent;
 import org.spideruci.analysis.trace.InvokeInsnExecEvent;
@@ -17,6 +18,11 @@ import org.spideruci.analysis.trace.TraceEvent;
 public class EmptyProfiler implements IProfiler {
 
   @Override
+  public boolean shouldInstrument(String className) {
+    return false;
+  }
+
+  @Override
   public String description() {
     return "EmptyProfiler";
   }
@@ -29,6 +35,8 @@ public class EmptyProfiler implements IProfiler {
   @Override
   public void profileMethodEntry(final EnterExecEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
+
+    TraceLogger.printEventlog(e);
   }
 
   @Override
@@ -39,31 +47,38 @@ public class EmptyProfiler implements IProfiler {
   @Override
   public void profileMethodInvoke(final InvokeInsnExecEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
+
+    TraceLogger.printEventlog(e);
   }
 
   @Override
   public void profileInsn(final InsnExecEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
+    TraceLogger.printEventlog(e);
   }
 
   @Override
   public void profileFieldInsn(final TraceEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
+    TraceLogger.printEventlog(e);
   }
 
   @Override
   public void profileVarInsn(final TraceEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
+    TraceLogger.printEventlog(e);
   }
 
   @Override
   public void profileArrayInsn(final TraceEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
+    TraceLogger.printEventlog(e);
   }
 
   @Override
   public void profileMethodExit(final InsnExecEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
+    TraceLogger.printEventlog(e);
   }
 
   @Override
@@ -74,6 +89,7 @@ public class EmptyProfiler implements IProfiler {
   @Override
   public void endProfiling(String desc) {
     // Convenience stub. Subclasses should appropriate implementation.
+    TraceLogger.printTraceCount();
   }
   
   @Override

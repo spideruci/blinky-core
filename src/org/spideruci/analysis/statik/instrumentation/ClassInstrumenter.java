@@ -12,7 +12,6 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.util.CheckClassAdapter;
-import org.spideruci.analysis.dynamic.Profiler;
 import org.spideruci.analysis.dynamic.TraceLogger;
 
 public class ClassInstrumenter {
@@ -44,9 +43,7 @@ public class ClassInstrumenter {
       throw e;
     }
 
-    if (TraceLogger.profiler != null) {
-      TraceLogger.profiler.willInstrumentClass(className);
-    }
+    TraceLogger.profiler().willInstrumentClass(className);
     
     return bytecode2;
   }
