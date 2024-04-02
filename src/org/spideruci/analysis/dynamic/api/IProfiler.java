@@ -35,6 +35,9 @@ public interface IProfiler {
   public void willInstrumentMethod(final MethodDecl e);
   public void willInstrumentCode(final TraceEvent e);
 
+
+  public String getLogConfig();
+
   // TODO:
   // 1. setup didInstrumentXYZ methods
   // 2. have willInstrumentXYZ methods return a bool to let users control which code bits are, or are not instrumented

@@ -4,16 +4,8 @@ import org.spideruci.analysis.dynamic.api.IProfiler;
 
 public class Config {
   public static int LINE_COUNT = 0;
-  
-  public static String[] exclusionList;
-  public static String[] inclusionList;
-  public static String[] retransformInclusionList;
-  public static String[] retransformExclusionList;
 
   public static IProfiler profiler;
-  
-  public static boolean checkInclusionList = true;
-  public static boolean forceCheckInclusionList = true;
   
   public static final String STATIC_IDENT = "C";
   

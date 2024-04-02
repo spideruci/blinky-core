@@ -39,30 +39,11 @@ public class Premain {
     }
 
     Profiler.initProfiler(agentArguments);
-    
-    REAL_ERR.println("EXCLUSION LIST");
-    for(int i = 0; i < Config.exclusionList.length; i += 1) {
-      REAL_ERR.println(Config.exclusionList[i]);
-    }
-    
-    REAL_ERR.println("INCLUSION LIST");
-    for(int i = 0; i < Config.inclusionList.length; i += 1) {
-      REAL_ERR.println(Config.inclusionList[i]);
-    }
-    
-    REAL_ERR.println("RETX INCLUSION LIST");
-    final int retxCount = Config.retransformInclusionList.length;
-    RuntimeClassRedefiner.RedefinitionTargets.wildCardTargets = new String[retxCount];
-    for(int i = 0; i < retxCount; i += 1) {
-      RuntimeClassRedefiner.RedefinitionTargets.wildCardTargets[i] =
-          Config.retransformInclusionList[i];
-      REAL_ERR.println(Config.retransformInclusionList[i]);
-    }
+    Profiler.initLogConfig(Config.profiler.getLogConfig());
     
     instrumentation.addTransformer(new Blinksformer());
     
-    if(Premain.allowRetransform 
-        && instrumentation.isRetransformClassesSupported()) {
+    if(Premain.allowRetransform && instrumentation.isRetransformClassesSupported()) {
       REAL_ERR.println("retransforming!");
       instrumentation.addTransformer(new RuntimeClassRedefiner(), true);
       

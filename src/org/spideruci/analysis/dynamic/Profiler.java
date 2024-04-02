@@ -82,15 +82,65 @@ public class Profiler {
     
     if(args == null || args.isEmpty()) {
       setLogFlags(true);
-      Config.checkInclusionList = false;
       return;
     }
     
     System.out.println(args);
     String[] split = args.split(",");
     
-    
-    String profileConfig = split[0];
+    String logConfig = split[0];
+
+    initLogConfig(logConfig);
+
+    for(int count = 1; count < split.length; count += 1) {
+      String arg = split[count]; 
+      if(arg == null || arg.length() == 0) {
+        continue;
+      }
+      String[] arg_split = arg.split("=");
+      String arg_name = arg_split[0];
+      String arg_value = arg_split.length == 1 ? "" : arg_split[1];
+      REAL_OUT.printf("'%s':%s\n", arg_name , arg_value);
+      
+      switch(arg_name) {
+      case "onlyfromallowlist": // defunct
+        break;
+      case "allowlist": // defunct
+        break;
+      case "entry-method":
+        entryMethod = arg_value;
+        break;
+      case "entry-class":
+        entryClass = arg_value;
+        break;
+      case "frames":
+        ClassInstrumenter.FRAMES = true;
+        break;
+      case "retransform":
+        Premain.allowRetransform = true;
+        break;
+      case "stop-app-ins":
+        Profiler.stopAppInsn = true;
+        break;
+      case "control":
+        ClassInstrumenter.CONTROL_FLOW = true;
+        break;
+      case "safe":
+        Profiler.SAFEMODE = true;
+        break;
+      case "calldepth":
+        Profiler.callDepth = true;
+        break;
+      case "sourcename":
+        Profiler.useSourcefileName = true;
+       default:
+         break;
+      }
+    }
+  }
+
+  synchronized static public void initLogConfig(final String logConfig) {
+    String profileConfig = logConfig;
     
     if(profileConfig.equals("0")) {
       setLogFlags(false);
@@ -101,7 +151,7 @@ public class Profiler {
     }
     
     char[] processedArgs = profileConfig.trim().toCharArray();
-    
+
     for(char arg : processedArgs) {
       switch(arg) {
       case 'E':
@@ -142,55 +192,6 @@ public class Profiler {
         logSwitch = true;
         continue;
       default: continue;
-      }
-    }
-
-    for(int count = 1; count < split.length; count += 1) {
-      String arg = split[count]; 
-      if(arg == null || arg.length() == 0) {
-        continue;
-      }
-      String[] arg_split = arg.split("=");
-      String arg_name = arg_split[0];
-      String arg_value = arg_split.length == 1 ? "" : arg_split[1];
-      REAL_OUT.printf("'%s':%s\n", arg_name , arg_value);
-      
-      switch(arg_name) {
-      case "onlyfromallowlist":
-    	Config.checkInclusionList = true;
-        Config.forceCheckInclusionList = true;
-        break;
-      case "allowlist":
-        Config.checkInclusionList = true;
-        break;
-      case "entry-method":
-        entryMethod = arg_value;
-        break;
-      case "entry-class":
-        entryClass = arg_value;
-        break;
-      case "frames":
-        ClassInstrumenter.FRAMES = true;
-        break;
-      case "retransform":
-        Premain.allowRetransform = true;
-        break;
-      case "stop-app-ins":
-        Profiler.stopAppInsn = true;
-        break;
-      case "control":
-        ClassInstrumenter.CONTROL_FLOW = true;
-        break;
-      case "safe":
-        Profiler.SAFEMODE = true;
-        break;
-      case "calldepth":
-        Profiler.callDepth = true;
-        break;
-      case "sourcename":
-        Profiler.useSourcefileName = true;
-       default:
-         break;
       }
     }
   }

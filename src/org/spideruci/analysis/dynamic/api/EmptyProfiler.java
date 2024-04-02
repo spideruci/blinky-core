@@ -106,4 +106,9 @@ public class EmptyProfiler implements IProfiler {
   @Override
   public void willInstrumentCode(final TraceEvent e) { }
 
+  @Override
+  public String getLogConfig() {
+    return "0";
+  }
+
 }
