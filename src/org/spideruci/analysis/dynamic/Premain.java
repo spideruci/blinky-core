@@ -29,6 +29,15 @@ public class Premain {
     
     REAL_OUT.println("Premain");
 
+    if (Config.profiler == null) {
+      REAL_OUT.println("Fatal Error: Config.profiler is null");
+      REAL_ERR.println("Fatal Error: Config.profiler is null");
+      System.exit(1);
+    } else {
+      REAL_OUT.println("Using Profiler");
+      REAL_OUT.println(Config.profiler.description());
+    }
+
     Profiler.initProfiler(agentArguments);
     
     REAL_ERR.println("EXCLUSION LIST");
