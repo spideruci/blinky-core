@@ -26,6 +26,8 @@ public class Premain {
     Profiler.$guard1$ = true;
     
     started = true;
+
+    Profiler.initPrintStreams();
     
     REAL_OUT.println("Premain");
 
@@ -37,8 +39,9 @@ public class Premain {
       REAL_OUT.println("Using Profiler");
       REAL_OUT.println(Config.profiler.description());
     }
-
+    
     Profiler.initProfiler(agentArguments);
+    Profiler.initProfilerFlags(Config.profiler);
     Profiler.initLogConfig(Config.profiler.getLogConfig());
     
     instrumentation.addTransformer(new Blinksformer());

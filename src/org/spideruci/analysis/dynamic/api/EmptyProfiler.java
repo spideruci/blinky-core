@@ -111,4 +111,50 @@ public class EmptyProfiler implements IProfiler {
     return "0";
   }
 
+  @Override
+  public String entryClass() {
+    return null;
+  }
+
+  @Override
+  public String entryMethod() {
+    return null;
+  }
+
+  @Override
+  public boolean stopAppInsn() {
+    return false;
+  }
+
+  @Override
+  public boolean canUseFrames() {
+    return false;
+  }
+
+  @Override
+  public boolean allowRetransform() {
+    return false;
+  }
+
+  @Override
+  public boolean enableControlFlowInstrumentation() {
+    return false;
+  }
+
+  @Override
+  public boolean isSafeMode() {
+    return false;
+  }
+
+  @Override
+  public boolean canRecordCallDepth() {
+    return false;
+  }
+
+  @Override
+  public boolean useSourcefileName() {
+    return false;
+  }
+
+
 }

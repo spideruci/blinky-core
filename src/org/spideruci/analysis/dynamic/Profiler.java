@@ -12,6 +12,7 @@ import static org.spideruci.analysis.dynamic.TraceLogger.handleInvokeLog;
 import java.io.PrintStream;
 import java.lang.reflect.Array;
 
+import org.spideruci.analysis.dynamic.api.IProfiler;
 import org.spideruci.analysis.statik.instrumentation.ClassInstrumenter;
 import org.spideruci.analysis.statik.instrumentation.Config;
 import org.spideruci.analysis.trace.EventType;
@@ -71,14 +72,8 @@ public class Profiler {
   }
 
   synchronized static public void initProfiler(String args) {
-    if(REAL_ERR == null) {
-      REAL_ERR = System.err;
-    }
     
-    if(REAL_OUT == null) {
-      REAL_OUT = System.out;
-    }
-    
+    initPrintStreams();
     
     if(args == null || args.isEmpty()) {
       setLogFlags(true);
@@ -91,51 +86,16 @@ public class Profiler {
     String logConfig = split[0];
 
     initLogConfig(logConfig);
+    initProfilerFlags(split);
+  }
 
-    for(int count = 1; count < split.length; count += 1) {
-      String arg = split[count]; 
-      if(arg == null || arg.length() == 0) {
-        continue;
-      }
-      String[] arg_split = arg.split("=");
-      String arg_name = arg_split[0];
-      String arg_value = arg_split.length == 1 ? "" : arg_split[1];
-      REAL_OUT.printf("'%s':%s\n", arg_name , arg_value);
-      
-      switch(arg_name) {
-      case "onlyfromallowlist": // defunct
-        break;
-      case "allowlist": // defunct
-        break;
-      case "entry-method":
-        entryMethod = arg_value;
-        break;
-      case "entry-class":
-        entryClass = arg_value;
-        break;
-      case "frames":
-        ClassInstrumenter.FRAMES = true;
-        break;
-      case "retransform":
-        Premain.allowRetransform = true;
-        break;
-      case "stop-app-ins":
-        Profiler.stopAppInsn = true;
-        break;
-      case "control":
-        ClassInstrumenter.CONTROL_FLOW = true;
-        break;
-      case "safe":
-        Profiler.SAFEMODE = true;
-        break;
-      case "calldepth":
-        Profiler.callDepth = true;
-        break;
-      case "sourcename":
-        Profiler.useSourcefileName = true;
-       default:
-         break;
-      }
+  synchronized static public void initPrintStreams() {
+    if(REAL_ERR == null) {
+      REAL_ERR = System.err;
+    }
+    
+    if(REAL_OUT == null) {
+      REAL_OUT = System.out;
     }
   }
 
@@ -196,6 +156,68 @@ public class Profiler {
     }
   }
   
+  synchronized static public void initProfilerFlags(IProfiler profiler) {
+    ClassInstrumenter.FRAMES = profiler.canUseFrames();
+    Premain.allowRetransform = profiler.allowRetransform();
+    Profiler.stopAppInsn = profiler.stopAppInsn();
+    ClassInstrumenter.CONTROL_FLOW = profiler.enableControlFlowInstrumentation();
+    Profiler.SAFEMODE = profiler.isSafeMode();
+    Profiler.callDepth = profiler.canRecordCallDepth();
+    Profiler.useSourcefileName = profiler.useSourcefileName();
+
+    Profiler.entryClass = profiler.entryClass();
+    Profiler.entryMethod = profiler.entryMethod();
+  }
+
+  synchronized static public void initProfilerFlags(String[] argSplit) {
+    for(int count = 1; count < argSplit.length; count += 1) {
+      String arg = argSplit[count]; 
+      if(arg == null || arg.length() == 0) {
+        continue;
+      }
+
+      String[] arg_split = arg.split("=");
+      String arg_name = arg_split[0];
+      String arg_value = arg_split.length == 1 ? "" : arg_split[1];
+      REAL_OUT.printf("'%s':%s\n", arg_name , arg_value);
+      
+      switch(arg_name) {
+      case "onlyfromallowlist": // defunct
+        break;
+      case "allowlist": // defunct
+        break;
+      case "entry-method":
+        entryMethod = arg_value;
+        break;
+      case "entry-class":
+        entryClass = arg_value;
+        break;
+      case "frames":
+        ClassInstrumenter.FRAMES = true;
+        break;
+      case "retransform":
+        Premain.allowRetransform = true;
+        break;
+      case "stop-app-ins":
+        Profiler.stopAppInsn = true;
+        break;
+      case "control":
+        ClassInstrumenter.CONTROL_FLOW = true;
+        break;
+      case "safe":
+        Profiler.SAFEMODE = true;
+        break;
+      case "calldepth":
+        Profiler.callDepth = true;
+        break;
+      case "sourcename":
+        Profiler.useSourcefileName = true;
+       default:
+         break;
+      }
+    }
+  }
+
   public static final String REGUARD = "reguard";
   synchronized static public void reguard(boolean guard) {
     $guard1$ = false; // TODO shouldn't this be guard instead of false?

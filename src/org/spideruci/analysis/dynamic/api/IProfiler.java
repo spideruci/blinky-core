@@ -38,6 +38,16 @@ public interface IProfiler {
 
   public String getLogConfig();
 
+  public String entryClass();
+  public String entryMethod();
+  public boolean stopAppInsn();
+  public boolean canUseFrames();
+  public boolean allowRetransform();
+  public boolean enableControlFlowInstrumentation();
+  public boolean isSafeMode();
+  public boolean canRecordCallDepth();
+  public boolean useSourcefileName();
+
   // TODO:
   // 1. setup didInstrumentXYZ methods
   // 2. have willInstrumentXYZ methods return a bool to let users control which code bits are, or are not instrumented
