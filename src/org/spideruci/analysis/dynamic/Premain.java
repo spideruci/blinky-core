@@ -30,6 +30,7 @@ public class Premain {
     Profiler.initPrintStreams();
     
     REAL_OUT.println("Premain");
+    REAL_OUT.println(agentArguments);
 
     if (Config.profiler == null) {
       REAL_OUT.println("Fatal Error: Config.profiler is null");
