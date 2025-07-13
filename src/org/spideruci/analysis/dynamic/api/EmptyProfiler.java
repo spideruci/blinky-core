@@ -45,7 +45,7 @@ public class EmptyProfiler implements IProfiler {
   }
 
   @Override
-  public void profileMethodArgumentValue(final Object value, final int argIndex, final int argCount, final String methodName) {
+  public void profileMethodArgumentValue(final Object value, final int argIndex, final int argCount, final String methodName, final String corelId) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
 

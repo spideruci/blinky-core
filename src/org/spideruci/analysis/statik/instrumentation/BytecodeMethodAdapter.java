@@ -108,6 +108,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
 
       if (!isStatic) {
         ProbeBuilder.start(mv)
+          .passArg("fakeCorelId")
           .passRef(0)
           .passArg(0)
           .passArg(argCount)
@@ -131,6 +132,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
         
         if(argInitial == 'L') {
           ProbeBuilder.start(mv)
+          .passArg("fakeCorelId")
           .passRef(varIndex)
           .passArg(varIndex)
           .passArg(argCount)
@@ -138,6 +140,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
           .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
         } else {
           ProbeBuilder.start(mv)
+          .passArg("fakeCorelId")
           .passPrimitiveVar(varIndex, argInitial)
           .passArg(varIndex)
           .passArg(argCount)
