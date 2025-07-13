@@ -99,7 +99,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
     }
 
     final String methodName = methodDecl.getDeclName();
-    final String fullMethodName = methodDecl.getDeclOwner() + methodName;
+    final String fullMethodName = methodDecl.getDeclOwner() + "." + methodName;
     if (!methodName.contains("init>")) {
       
       final String[] argTypes = MethodDescSplitter.getArgTypeSplit(methodName);
