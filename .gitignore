@@ -78,6 +78,7 @@ Blinky.ucls
 
 #OSX hidden files
 .DS_Store/
+.DS_Store
 
 .idea/
 *iml
@@ -86,4 +87,3 @@ Blinky.ucls
 yaml-files/
 yamls/
 
-.DS_Store

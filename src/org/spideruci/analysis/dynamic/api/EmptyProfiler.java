@@ -45,6 +45,11 @@ public class EmptyProfiler implements IProfiler {
   }
 
   @Override
+  public void profileMethodArgumentValue(final Object value, final int argIndex, final int argCount, final String methodName) {
+    // Convenience stub. Subclasses should appropriate implementation.
+  }
+
+  @Override
   public void profileMethodInvoke(final InvokeInsnExecEvent e) {
     // Convenience stub. Subclasses should appropriate implementation.
 

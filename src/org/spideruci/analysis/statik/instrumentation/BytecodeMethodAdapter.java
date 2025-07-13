@@ -96,7 +96,55 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
         .passArg(i == (argTypes.length - 1)) // isLast?
         .build(Profiler.ARGLOG, profilerToUse(methodDecl.getDeclOwner()));
       }
+    }
+
+    final String methodName = methodDecl.getDeclName();
+    final String fullMethodName = methodDecl.getDeclOwner() + methodName;
+    if (!methodName.contains("init>")) {
       
+      final String[] argTypes = MethodDescSplitter.getArgTypeSplit(methodName);
+      int varOffset = (isStatic? 0 : 1);
+      final int argCount = argTypes.length + varOffset;
+
+      if (!isStatic) {
+        ProbeBuilder.start(mv)
+          .passRef(0)
+          .passArg(0)
+          .passArg(argCount)
+          .passArg(fullMethodName)
+          .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
+      }
+
+      for(int i = 0; i < argTypes.length; i += 1) {
+        String argType = argTypes[i];
+        int varIndex = i + varOffset;
+        
+        char argInitial = argType.charAt(0);
+        
+        if(argInitial == 'D' || argInitial == 'J') {
+          varOffset += 1;
+        }
+
+        if(argInitial == '[') {
+          continue;
+        }
+        
+        if(argInitial == 'L') {
+          ProbeBuilder.start(mv)
+          .passRef(varIndex)
+          .passArg(varIndex)
+          .passArg(argCount)
+          .passArg(fullMethodName)
+          .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
+        } else {
+          ProbeBuilder.start(mv)
+          .passPrimitiveVar(varIndex, argInitial)
+          .passArg(varIndex)
+          .passArg(argCount)
+          .passArg(fullMethodName)
+          .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
+        }
+      }
     }
     
     String instructionLog = buildInstructionLog(-1, -1, EventType.$enter$, 

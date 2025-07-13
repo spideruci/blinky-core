@@ -7,6 +7,7 @@ import static org.spideruci.analysis.dynamic.TraceLogger.handleArrayLog;
 import static org.spideruci.analysis.dynamic.TraceLogger.handleEnterLog;
 import static org.spideruci.analysis.dynamic.TraceLogger.handleFieldLog;
 import static org.spideruci.analysis.dynamic.TraceLogger.handleInvokeLog;
+import static org.spideruci.analysis.dynamic.TraceLogger.handleArgValueLog;
 
 
 import java.io.PrintStream;
@@ -508,7 +509,47 @@ public class Profiler {
       return obj.getClass().getName() + "#" + System.identityHashCode(obj);
     }
   }
-  
+
+  public static final String RECORD_VALUE = "recordValue";
+  synchronized static public void recordValue(Object obj, int argIndex, int argCount, String methodName) {
+    if($guard1$) return;
+    boolean guard = guard();
+    handleArgValueLog(obj, argIndex, argCount, methodName);
+    reguard(guard);
+  }
+
+  synchronized static public void recordValue(int value, int argIndex, int argCount, String methodName) {
+    recordValue(Integer.valueOf(value), argIndex, argCount, methodName);
+  }
+
+  synchronized static public void recordValue(short value, int argIndex, int argCount, String methodName) {
+    recordValue(Short.valueOf(value), argIndex, argCount, methodName);
+  }
+
+  synchronized static public void recordValue(byte value, int argIndex, int argCount, String methodName) {
+    recordValue(Byte.valueOf(value), argIndex, argCount, methodName);
+  }
+
+  synchronized static public void recordValue(boolean value, int argIndex, int argCount, String methodName) {
+    recordValue(Boolean.valueOf(value), argIndex, argCount, methodName);
+  }
+
+  synchronized static public void recordValue(char value, int argIndex, int argCount, String methodName) {
+    recordValue(Character.valueOf(value), argIndex, argCount, methodName);
+  }
+
+  synchronized static public void recordValue(float value, int argIndex, int argCount, String methodName) {
+    recordValue(Float.valueOf(value), argIndex, argCount, methodName);
+  }
+
+  synchronized static public void recordValue(long value, int argIndex, int argCount, String methodName) {
+    recordValue(Long.valueOf(value), argIndex, argCount, methodName);
+  }
+
+  synchronized static public void recordValue(double value, int argIndex, int argCount, String methodName) {
+    recordValue(Double.valueOf(value), argIndex, argCount, methodName);
+  }
+
   public static final String GET_ARRAYTYPENAME = "getArrayTypeName";
   synchronized static public String getArrayTypeName(Object array, String staticType) {
     if(array == null) {

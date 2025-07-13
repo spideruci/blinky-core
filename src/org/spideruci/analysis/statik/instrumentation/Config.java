@@ -22,6 +22,7 @@ public class Config {
   public static final String INT_TYPEDESC = "I";
   public static final String FLOAT_TYPEDESC = "F";
   public static final String CHAR_TYPEDESC = "C";
+  public static final String SHORT_TYPEDESC = "S";
   public static final String BOOLEAN_TYPEDESC = "Z";
   public static final String BYTE_TYPEDESC = "B";
   public static final String DOUBLE_TYPEDESC = "D";

@@ -4,6 +4,7 @@ import static org.spideruci.analysis.dynamic.Profiler.REAL_ERR;
 import static org.spideruci.analysis.dynamic.Profiler.REAL_OUT;
 
 import java.lang.instrument.Instrumentation;
+import java.lang.reflect.InvocationTargetException;
 
 import org.spideruci.analysis.statik.instrumentation.Config;
 
@@ -31,6 +32,29 @@ public class Premain {
     
     REAL_OUT.println("Premain");
     REAL_OUT.println(agentArguments);
+
+    try {
+      Class.forName(agentArguments).getMethod("init").invoke(null);
+    } catch (IllegalAccessException e) {
+      REAL_ERR.println("thrown IllegalAccessException" + e.getMessage());
+      e.printStackTrace();
+    } catch (IllegalArgumentException e) {
+      REAL_ERR.println("thrown IllegalArgumentException" + e.getMessage());
+      e.printStackTrace();
+    } catch (InvocationTargetException e) {
+      REAL_ERR.println("thrown InvocationTargetException" + e.getMessage());
+      e.printStackTrace();
+    } catch (NoSuchMethodException e) {
+      REAL_ERR.println("thrown NoSuchMethodException" + e.getMessage());
+      e.printStackTrace();
+    } catch (SecurityException e) {
+      REAL_ERR.println("thrown SecurityException" + e.getMessage());
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      REAL_ERR.println("thrown ClassNotFoundException" + e.getMessage());
+      e.printStackTrace();
+    }
+
 
     if (Config.profiler == null) {
       REAL_OUT.println("Fatal Error: Config.profiler is null");

@@ -189,6 +189,10 @@ public class TraceLogger {
 //        (isLast? "\n" : ","));
   }
 
+  synchronized static public void handleArgValueLog(Object object, int argIndex, int argCount, String methodString) {
+    profiler().profileMethodArgumentValue(object, argIndex, argCount, methodString);
+  }
+
   synchronized static public void printEventlog(TraceEvent event) {
     int insnId = Integer.parseInt(event.getExecInsnEventId());
     if(Profiler.stopAppInsn && insnId >= 0) {

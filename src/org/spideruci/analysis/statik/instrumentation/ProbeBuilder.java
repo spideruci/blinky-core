@@ -71,11 +71,67 @@ public class ProbeBuilder implements Opcodes {
     this.callbackDesc.append(Config.EVENT_TYPE_DESC);
     return this;
   }
+
+  public ProbeBuilder passIntVar(int var) {
+	  this.mv.visitVarInsn(Opcodes.ILOAD, var);
+	  this.callbackDesc.append(Config.INT_TYPEDESC);
+	  return this;
+  }
+
+  public ProbeBuilder passByteVar(int var) {
+	  this.mv.visitVarInsn(Opcodes.ILOAD, var);
+	  this.callbackDesc.append(Config.BYTE_TYPEDESC);
+	  return this;
+  }
+
+  public ProbeBuilder passCharVar(int var) {
+	  this.mv.visitVarInsn(Opcodes.ILOAD, var);
+	  this.callbackDesc.append(Config.CHAR_TYPEDESC);
+	  return this;
+  }
+
+  public ProbeBuilder passShortVar(int var) {
+	  this.mv.visitVarInsn(Opcodes.ILOAD, var);
+	  this.callbackDesc.append(Config.SHORT_TYPEDESC);
+	  return this;
+  }
+
+  public ProbeBuilder passBooleanVar(int var) {
+	  this.mv.visitVarInsn(Opcodes.ILOAD, var);
+	  this.callbackDesc.append(Config.BOOLEAN_TYPEDESC);
+	  return this;
+  }
+
+  public ProbeBuilder passFloatVar(int var) {
+	  this.mv.visitVarInsn(Opcodes.FLOAD, var);
+	  this.callbackDesc.append(Config.FLOAT_TYPEDESC);
+	  return this;
+  }
   
   public ProbeBuilder passLongVar(int var) {
 	  this.mv.visitVarInsn(Opcodes.LLOAD, var);
 	  this.callbackDesc.append(Config.LONG_TYPEDESC);
 	  return this;
+  }
+
+  public ProbeBuilder passDoubleVar(int var) {
+	  this.mv.visitVarInsn(Opcodes.DLOAD, var);
+	  this.callbackDesc.append(Config.DOUBLE_TYPEDESC);
+	  return this;
+  }
+
+  public ProbeBuilder passPrimitiveVar(int var, char desc) {
+    switch (desc) {
+      case 'I': return passIntVar(var);
+      case 'F': return passFloatVar(var);
+      case 'J': return passLongVar(var);
+      case 'D': return passDoubleVar(var);
+      case 'Z': return passBooleanVar(var);
+      case 'C': return passCharVar(var);
+      case 'B': return passByteVar(var);
+      case 'S': return passShortVar(var);
+      default: throw new RuntimeException();
+    }
   }
   
   public ProbeBuilder passThis(String methodAccess) {

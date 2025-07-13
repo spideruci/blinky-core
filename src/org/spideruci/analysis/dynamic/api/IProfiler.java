@@ -20,6 +20,7 @@ public interface IProfiler {
   public void profileMethodEntry(final EnterExecEvent e);
 
   public void profileMethodArgument(final TraceEvent e);
+  public void profileMethodArgumentValue(final Object value, final int argIndex, int argCount, final String methodName);
   public void profileMethodInvoke(final InvokeInsnExecEvent e);
   
   public void profileInsn(final InsnExecEvent e);
