@@ -15,6 +15,7 @@ public class Config {
   public static final String PROFILER_B_NAME = "org/spideruci/analysis/dynamic/ProfilerB";
   public static final String TRACE_LOGGER = "org/spideruci/analysis/dynamic/TraceLogger";
   public static final String RUNTIME_TYPE_PROFILER_NAME = "org/spideruci/analysis/dynamic/RuntimeTypeProfiler";
+  public static final String JAVA_UUID_NAME = "java/util/UUID";
   
   public static final String STRING_DESC = "Ljava/lang/String;";
   public static final String OBJECT_DESC = "Ljava/lang/Object;";
@@ -27,6 +28,7 @@ public class Config {
   public static final String BYTE_TYPEDESC = "B";
   public static final String DOUBLE_TYPEDESC = "D";
   public static final String LONG_TYPEDESC = "J";
+  public static final String UUID_TYPEDESC = "Ljava/util/UUID;";
   
   public static final String LDC_16 = "$ldc_16$";
   public static final String LDC_8 = "$ldc_8$";

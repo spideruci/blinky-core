@@ -172,6 +172,24 @@ public class ProbeBuilder implements Opcodes {
     
     return this;
   }
+
+  public ProbeBuilder loadUUID() {
+    mv.visitMethodInsn(
+      Opcodes.INVOKESTATIC, 
+      Config.JAVA_UUID_NAME, 
+      "randomUUID", 
+      "()" + Config.UUID_TYPEDESC, 
+      false
+    );
+    mv.visitMethodInsn(
+      Opcodes.INVOKEVIRTUAL, 
+      Config.JAVA_UUID_NAME, 
+      "toString", 
+      "()" + Config.STRING_DESC, 
+      false
+    );
+    return this;
+  }
   
   private boolean isDescRef(String desc) {
     switch(desc) {

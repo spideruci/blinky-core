@@ -106,9 +106,12 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
       int varOffset = (isStatic? 0 : 1);
       final int argCount = argTypes.length + varOffset;
 
+      ProbeBuilder.start(mv).loadUUID(); // UUID for corelId
+
       if (!isStatic) {
+        mv.visitInsn(Opcodes.DUP); // for the corelId:UUID
         ProbeBuilder.start(mv)
-          .passArg("fakeCorelId")
+          .appendDesc(Config.STRING_DESC) // corelId:UUID
           .passRef(0)
           .passArg(0)
           .passArg(argCount)
@@ -130,9 +133,11 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
           continue;
         }
         
+        mv.visitInsn(Opcodes.DUP); // for the corelId:UUID
+
         if(argInitial == 'L') {
           ProbeBuilder.start(mv)
-          .passArg("fakeCorelId")
+          .appendDesc(Config.STRING_DESC) // corelId:UUID
           .passRef(varIndex)
           .passArg(varIndex)
           .passArg(argCount)
@@ -140,7 +145,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
           .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
         } else {
           ProbeBuilder.start(mv)
-          .passArg("fakeCorelId")
+          .appendDesc(Config.STRING_DESC) // corelId:UUID
           .passPrimitiveVar(varIndex, argInitial)
           .passArg(varIndex)
           .passArg(argCount)
@@ -148,6 +153,8 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
           .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
         }
       }
+
+      mv.visitInsn(Opcodes.POP); // for the corelId:UUID
     }
     
     String instructionLog = buildInstructionLog(-1, -1, EventType.$enter$, 
