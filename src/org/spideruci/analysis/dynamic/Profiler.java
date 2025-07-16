@@ -72,7 +72,8 @@ public class Profiler {
             value;
   }
 
-  synchronized static public void initProfiler(String args) {
+  @Deprecated
+  synchronized static public void donot_use_initProfiler(String args) {
     
     initPrintStreams();
     
@@ -87,7 +88,7 @@ public class Profiler {
     String logConfig = split[0];
 
     initLogConfig(logConfig);
-    initProfilerFlags(split);
+    donot_use_initProfilerFlags(split);
   }
 
   synchronized static public void initPrintStreams() {
@@ -170,7 +171,8 @@ public class Profiler {
     Profiler.entryMethod = profiler.entryMethod();
   }
 
-  synchronized static public void initProfilerFlags(String[] argSplit) {
+  @Deprecated
+  synchronized static private void donot_use_initProfilerFlags(String[] argSplit) {
     for(int count = 1; count < argSplit.length; count += 1) {
       String arg = argSplit[count]; 
       if(arg == null || arg.length() == 0) {

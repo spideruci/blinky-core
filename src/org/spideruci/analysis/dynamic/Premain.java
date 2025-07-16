@@ -31,10 +31,12 @@ public class Premain {
     Profiler.initPrintStreams();
     
     REAL_OUT.println("Premain");
-    REAL_OUT.println(agentArguments);
+    var split = agentArguments.split(";");
+    var profilerClass = split[0];
+    REAL_OUT.println(profilerClass);
 
     try {
-      Class.forName(agentArguments).getMethod("init").invoke(null);
+      Class.forName(profilerClass).getMethod("init").invoke(null);
     } catch (
       IllegalAccessException 
       | IllegalArgumentException 
@@ -56,8 +58,13 @@ public class Premain {
       REAL_OUT.println("Using Profiler");
       REAL_OUT.println(Config.profiler.description());
     }
+
+    if (split.length >= 2) {
+      var instrumentationScope = split[1];
+      Config.profiler.setInstrumentationScope(instrumentationScope);
+    }
     
-    Profiler.initProfiler(agentArguments);
+    Profiler.initPrintStreams();
     Profiler.initProfilerFlags(Config.profiler);
     Profiler.initLogConfig(Config.profiler.getLogConfig());
     
