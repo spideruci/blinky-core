@@ -39,8 +39,7 @@ public interface IProfiler {
 
   public String getLogConfig();
 
-  public void setEntryClass(final String className);
-  public void setEntryMethod(final String methodName);
+  public void setInstrumentationScope(final String classOrPackageNamePrefix);
   public String entryClass();
   public String entryMethod();
   public boolean stopAppInsn();
@@ -50,6 +49,7 @@ public interface IProfiler {
   public boolean isSafeMode();
   public boolean canRecordCallDepth();
   public boolean useSourcefileName();
+  public boolean autoStartAndStopProfile();
 
   // TODO:
   // 1. setup didInstrumentXYZ methods

@@ -117,12 +117,7 @@ public class EmptyProfiler implements IProfiler {
   }
 
   @Override
-  public void setEntryClass(final String className) {
-    // Convenience stub. Subclasses should provide appropriate implementation
-  }
-  
-  @Override
-  public void setEntryMethod(final String methodName) {
+  public void setInstrumentationScope(final String classOrPackageNamePrefix) {
     // Convenience stub. Subclasses should provide appropriate implementation
   }
 
@@ -168,6 +163,11 @@ public class EmptyProfiler implements IProfiler {
 
   @Override
   public boolean useSourcefileName() {
+    return false;
+  }
+
+  @Override
+  public boolean autoStartAndStopProfile() {
     return false;
   }
 

@@ -233,7 +233,7 @@ public class Profiler {
   
   public static final String METHODENTER = "printLnMethodEnterLog";
   synchronized static public long printLnMethodEnterLog(String className, String methodName, String instruction, String tag) {
-    if(getUnsetGuardCondition(className, methodName)) { // QUICKFIX: `|| methodName.startsWith("main")) {`
+    if(getUnsetGuardCondition(className, methodName)) {
       unsetGuard1();
     }
 
@@ -588,6 +588,17 @@ public class Profiler {
    */
   synchronized private static boolean 
   getUnsetGuardCondition(String ownerName, String methodName) {
+    if (TraceLogger.profiler().autoStartAndStopProfile()) {
+      boolean regCondition = methodName.equals("main([Ljava/lang/String;)V");
+      if(regCondition) {
+        synchronized (REAL_OUT) {
+          REAL_OUT.println(regCondition);
+        }
+      }
+      
+      return regCondition;
+    }
+
     if(entryMethod != null && entryClass != null) {
       boolean isMatch = methodName.equals(entryMethod) && entryClass.equals(ownerName);
       if(isMatch) {
@@ -599,14 +610,7 @@ public class Profiler {
       return methodName.equals(entryMethod);
     }
     
-    boolean regCondition = methodName.equals("main([Ljava/lang/String;)V");
-    if(regCondition) {
-      synchronized (REAL_OUT) {
-        REAL_OUT.println(regCondition);
-      }
-    }
-    
-    return regCondition;
+    return false;
   }
 
   /**
@@ -620,15 +624,20 @@ public class Profiler {
    */
   synchronized private static boolean 
   getSetGuardCondition(String ownerName, String methodName) {
+    if (TraceLogger.profiler().autoStartAndStopProfile()) {
+      boolean regular = methodName.equals("main([Ljava/lang/String;)V") 
+          || methodName.equals("realMain([Ljava/lang/String;)V");
+      
+      return regular;
+    }
+
     if(entryMethod != null && entryClass != null) {
       return methodName.equals(entryMethod) && entryClass.equals(ownerName);
     } else if(entryMethod != null) {
       return methodName.equals(entryMethod);
     }
-    boolean regular = methodName.equals("main([Ljava/lang/String;)V") 
-        || methodName.equals("realMain([Ljava/lang/String;)V");
-    
-    return regular;
+
+    return false;
   }
   
   synchronized public static void emitLogs(final String traceName) {
