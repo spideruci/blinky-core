@@ -117,6 +117,16 @@ public class EmptyProfiler implements IProfiler {
   }
 
   @Override
+  public void setEntryClass(final String className) {
+    // Convenience stub. Subclasses should provide appropriate implementation
+  }
+  
+  @Override
+  public void setEntryMethod(final String methodName) {
+    // Convenience stub. Subclasses should provide appropriate implementation
+  }
+
+  @Override
   public String entryClass() {
     return null;
   }
