@@ -35,23 +35,15 @@ public class Premain {
 
     try {
       Class.forName(agentArguments).getMethod("init").invoke(null);
-    } catch (IllegalAccessException e) {
-      REAL_ERR.println("thrown IllegalAccessException" + e.getMessage());
-      e.printStackTrace();
-    } catch (IllegalArgumentException e) {
-      REAL_ERR.println("thrown IllegalArgumentException" + e.getMessage());
-      e.printStackTrace();
-    } catch (InvocationTargetException e) {
-      REAL_ERR.println("thrown InvocationTargetException" + e.getMessage());
-      e.printStackTrace();
-    } catch (NoSuchMethodException e) {
-      REAL_ERR.println("thrown NoSuchMethodException" + e.getMessage());
-      e.printStackTrace();
-    } catch (SecurityException e) {
-      REAL_ERR.println("thrown SecurityException" + e.getMessage());
-      e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-      REAL_ERR.println("thrown ClassNotFoundException" + e.getMessage());
+    } catch (
+      IllegalAccessException 
+      | IllegalArgumentException 
+      | InvocationTargetException 
+      | NoSuchMethodException 
+      | SecurityException 
+      | ClassNotFoundException e
+    ) {
+      REAL_ERR.println("thrown " + e.getMessage());
       e.printStackTrace();
     }
 
