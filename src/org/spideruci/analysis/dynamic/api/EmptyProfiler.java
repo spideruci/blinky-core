@@ -98,7 +98,7 @@ public class EmptyProfiler implements IProfiler {
   }
   
   @Override
-  public void emitLogs() {
+  public void emitLogs(final String traceName) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
 

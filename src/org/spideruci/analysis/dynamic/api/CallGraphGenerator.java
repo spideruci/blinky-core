@@ -145,7 +145,7 @@ public class CallGraphGenerator extends EmptyProfiler {
 		REAL_OUT.println("endProfiling");
 	}
 	
-	public void emitLogs() {
+	public void emitLogs(final String traceName) {
 		REAL_OUT.printf("METHODS (%d)\n", methodLookup.size());
 		
 		for (var entry : methodLookup.entrySet()) {

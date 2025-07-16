@@ -631,8 +631,8 @@ public class Profiler {
     return regular;
   }
   
-  synchronized public static void emitLogs() {
-	  TraceLogger.profiler().emitLogs();
+  synchronized public static void emitLogs(final String traceName) {
+	  TraceLogger.profiler().emitLogs(traceName);
   }
   
 
