@@ -586,7 +586,7 @@ public class Profiler {
    * False if current method is not main(String[]) <br/>
    * current method is defined using mid.MethodName and mid.MethodDescription
    */
-  synchronized public static boolean 
+  synchronized private static boolean 
   getUnsetGuardCondition(String ownerName, String methodName) {
     if(entryMethod != null && entryClass != null) {
       boolean isMatch = methodName.equals(entryMethod) && entryClass.equals(ownerName);
@@ -618,7 +618,7 @@ public class Profiler {
    * False if current method is not main(String[]) <br/>
    * current method is defined using mid.MethodName and mid.MethodDescription
    */
-  synchronized public static boolean 
+  synchronized private static boolean 
   getSetGuardCondition(String ownerName, String methodName) {
     if(entryMethod != null && entryClass != null) {
       return methodName.equals(entryMethod) && entryClass.equals(ownerName);
