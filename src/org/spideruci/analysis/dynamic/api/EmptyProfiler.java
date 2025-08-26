@@ -45,7 +45,7 @@ public class EmptyProfiler implements IProfiler {
   }
 
   @Override
-  public void profileMethodArgumentValue(final Object value, final int argIndex, final int argCount, final String methodName, final String corelId) {
+  public void profileMethodArgumentValue(final Object value, final int argIndex, final int argCount, final String methodName, final boolean isStatic, final String corelId) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
 
@@ -98,7 +98,7 @@ public class EmptyProfiler implements IProfiler {
   }
   
   @Override
-  public void emitLogs(final String traceName) {
+  public void emitLogs(final String traceName, final String logPath) {
     // Convenience stub. Subclasses should appropriate implementation.
   }
 

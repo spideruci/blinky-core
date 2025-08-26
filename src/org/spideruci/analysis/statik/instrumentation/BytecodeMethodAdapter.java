@@ -116,6 +116,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
           .passArg(0)
           .passArg(argCount)
           .passArg(fullMethodName)
+          .passArg(isStatic)
           .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
       }
 

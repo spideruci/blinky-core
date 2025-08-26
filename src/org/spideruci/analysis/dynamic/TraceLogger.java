@@ -189,8 +189,8 @@ public class TraceLogger {
 //        (isLast? "\n" : ","));
   }
 
-  synchronized static public void handleArgValueLog(Object object, int argIndex, int argCount, String methodString, String corelId) {
-    profiler().profileMethodArgumentValue(object, argIndex, argCount, methodString, corelId);
+  synchronized static public void handleArgValueLog(Object object, int argIndex, int argCount, String methodString, boolean isStatic, String corelId) {
+    profiler().profileMethodArgumentValue(object, argIndex, argCount, methodString, isStatic, corelId);
   }
 
   synchronized static public void printEventlog(TraceEvent event) {

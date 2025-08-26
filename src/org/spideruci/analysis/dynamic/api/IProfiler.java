@@ -14,13 +14,13 @@ public interface IProfiler {
   
   public void startProfiling(String description);
   public void endProfiling(String description);
-  public void emitLogs(final String traceName);
+  public void emitLogs(final String traceName, final String logPath);
   
   public void willProfile();
   public void profileMethodEntry(final EnterExecEvent e);
 
   public void profileMethodArgument(final TraceEvent e);
-  public void profileMethodArgumentValue(final Object value, final int argIndex, final int argCount, final String methodName, final String corelId);
+  public void profileMethodArgumentValue(final Object value, final int argIndex, final int argCount, final String methodName, final boolean isStatic, final String corelId);
   public void profileMethodInvoke(final InvokeInsnExecEvent e);
   
   public void profileInsn(final InsnExecEvent e);

@@ -513,10 +513,10 @@ public class Profiler {
   }
 
   public static final String RECORD_VALUE = "recordValue";
-  synchronized static public void recordValue(String corelId, Object obj, int argIndex, int argCount, String methodName) {
+  synchronized static public void recordValue(String corelId, Object obj, int argIndex, int argCount, String methodName, boolean isStatic) {
     if($guard1$) return;
     boolean guard = guard();
-    handleArgValueLog(obj, argIndex, argCount, methodName, corelId);
+    handleArgValueLog(obj, argIndex, argCount, methodName, isStatic, corelId);
     reguard(guard);
   }
 
@@ -642,8 +642,8 @@ public class Profiler {
     return false;
   }
   
-  synchronized public static void emitLogs(final String traceName) {
-	  TraceLogger.profiler().emitLogs(traceName);
+  synchronized public static void emitLogs(final String traceName, final String logPath) {
+	  TraceLogger.profiler().emitLogs(traceName, logPath);
   }
   
 
