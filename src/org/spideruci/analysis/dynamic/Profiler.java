@@ -520,36 +520,36 @@ public class Profiler {
     reguard(guard);
   }
 
-  synchronized static public void recordValue(String corelId, int value, int argIndex, int argCount, String methodName) {
-    recordValue(corelId, Integer.valueOf(value), argIndex, argCount, methodName);
+  synchronized static public void recordValue(String corelId, int value, int argIndex, int argCount, String methodName, boolean isStatic) {
+    recordValue(corelId, Integer.valueOf(value), argIndex, argCount, methodName, isStatic);
   }
 
-  synchronized static public void recordValue(String corelId, short value, int argIndex, int argCount, String methodName) {
-    recordValue(corelId, Short.valueOf(value), argIndex, argCount, methodName);
+  synchronized static public void recordValue(String corelId, short value, int argIndex, int argCount, String methodName, boolean isStatic) {
+    recordValue(corelId, Short.valueOf(value), argIndex, argCount, methodName, isStatic);
   }
 
-  synchronized static public void recordValue(String corelId, byte value, int argIndex, int argCount, String methodName) {
-    recordValue(corelId, Byte.valueOf(value), argIndex, argCount, methodName);
+  synchronized static public void recordValue(String corelId, byte value, int argIndex, int argCount, String methodName, boolean isStatic) {
+    recordValue(corelId, Byte.valueOf(value), argIndex, argCount, methodName, isStatic);
   }
 
-  synchronized static public void recordValue(String corelId, boolean value, int argIndex, int argCount, String methodName) {
-    recordValue(corelId, Boolean.valueOf(value), argIndex, argCount, methodName);
+  synchronized static public void recordValue(String corelId, boolean value, int argIndex, int argCount, String methodName, boolean isStatic) {
+    recordValue(corelId, Boolean.valueOf(value), argIndex, argCount, methodName, isStatic);
   }
 
-  synchronized static public void recordValue(String corelId, char value, int argIndex, int argCount, String methodName) {
-    recordValue(corelId, Character.valueOf(value), argIndex, argCount, methodName);
+  synchronized static public void recordValue(String corelId, char value, int argIndex, int argCount, String methodName, boolean isStatic) {
+    recordValue(corelId, Character.valueOf(value), argIndex, argCount, methodName, isStatic);
   }
 
-  synchronized static public void recordValue(String corelId, float value, int argIndex, int argCount, String methodName) {
-    recordValue(corelId, Float.valueOf(value), argIndex, argCount, methodName);
+  synchronized static public void recordValue(String corelId, float value, int argIndex, int argCount, String methodName, boolean isStatic) {
+    recordValue(corelId, Float.valueOf(value), argIndex, argCount, methodName, isStatic);
   }
 
-  synchronized static public void recordValue(String corelId, long value, int argIndex, int argCount, String methodName) {
-    recordValue(corelId, Long.valueOf(value), argIndex, argCount, methodName);
+  synchronized static public void recordValue(String corelId, long value, int argIndex, int argCount, String methodName, boolean isStatic) {
+    recordValue(corelId, Long.valueOf(value), argIndex, argCount, methodName, isStatic);
   }
 
-  synchronized static public void recordValue(String corelId, double value, int argIndex, int argCount, String methodName) {
-    recordValue(corelId, Double.valueOf(value), argIndex, argCount, methodName);
+  synchronized static public void recordValue(String corelId, double value, int argIndex, int argCount, String methodName, boolean isStatic) {
+    recordValue(corelId, Double.valueOf(value), argIndex, argCount, methodName, isStatic);
   }
 
   public static final String GET_ARRAYTYPENAME = "getArrayTypeName";

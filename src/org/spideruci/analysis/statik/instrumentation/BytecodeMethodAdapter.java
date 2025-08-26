@@ -143,6 +143,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
           .passArg(varIndex)
           .passArg(argCount)
           .passArg(fullMethodName)
+          .passArg(isStatic)
           .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
         } else {
           ProbeBuilder.start(mv)
@@ -151,6 +152,7 @@ public class BytecodeMethodAdapter extends AdviceAdapter {
           .passArg(varIndex)
           .passArg(argCount)
           .passArg(fullMethodName)
+          .passArg(isStatic)
           .build(Profiler.RECORD_VALUE, profilerToUse(methodDecl.getDeclOwner()));
         }
       }
